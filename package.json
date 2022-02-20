@@ -1,0 +1,39 @@
+{
+    "name": "hexcode-server-a",
+    "version": "1.0.0",
+    "description": "fetches and posts data related to organising group events",
+    "main": "index.js",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "start": "node ./bin/www.js",
+        "dev": "nodemon -r dotenv/config  ./bin/www.js",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+        "db-create-test-record-table": "node -r dotenv/config ./db/scripts/createTestRecordTable.js",
+        "db-drop-test-record-table": "node -r dotenv/config ./db/scripts/dropTestRecordTable.js",
+        "db-populate-test-record-table": "node -r dotenv/config ./db/scripts/populateTestRecordTable.js",
+        "db-deploy-test-record-table": "npm run db-drop-test-record-table && npm run db-create-test-record-table && npm run db-populate-test-record-table"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SchoolOfCode/final-project-repo-hexcode.git"
+    },
+    "author": "Sinead Akwei Ashlie Dan Ivan and James",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/SchoolOfCode/final-project-repo-hexcode/issues"
+    },
+    "homepage": "https://github.com/SchoolOfCode/final-project-repo-hexcode#readme",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "env-var": "^7.1.1",
+        "express": "^4.17.2",
+        "pg": "^8.7.1"
+    },
+    "devDependencies": {
+        "dotenv": "^14.2.0",
+        "nodemon": "^2.0.15",
+        "jest": "^27.4.5",
+        "supertest": "^6.1.6"
+    }
+}
