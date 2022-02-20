@@ -47,9 +47,9 @@ export async function postTestRecord(newTestRecord) {
         test_some_status
     )
     VALUES(
-        ${newTestRecord.user_id},
-        '${newTestRecord.test_some_string}',
-        ${newTestRecord.test_some_int},
+        ${newTestRecord.testUserId},
+        '${newTestRecord.testRecordSomeString}',
+        ${newTestRecord.testRecordSomeInt},
         'new'
     );`; //TODO: replace 'new' with a CONST, ideally defined in config.js and imported
 

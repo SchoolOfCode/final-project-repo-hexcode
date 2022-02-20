@@ -1,0 +1,28 @@
+TODO: find out the correct way of doumenting this mapping.
+
+1. test_record table:
+
+The following is the column name mapping to API attribute names in the res.json.payload object:
+
+TODO: redocument this as a table format:
+
+```
+    t.id as "testRecordId",
+    t.user_id as "testUserId",
+    t.test_some_string as "testRecordSomeString",
+    t.test_some_int as "testRecordSomeInt",
+    t.test_some_status as "testSomeStatus",
+    to_char(t.test_date_posted, 'dd-mm-yyyy') as "testRecordDatePosted",
+    t.create_date_time as "testRecordCreateDateTime"
+```
+
+plus, when POSTING (inserting) a new record, only need to send in the following (the others are created by the database)
+
+-   testUserId
+-   testRecordSomeString
+-   testRecordSomeInt
+-   testSomeStatus
+
+2. user table
+
+3. event table
