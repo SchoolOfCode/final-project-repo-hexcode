@@ -12,13 +12,14 @@ export async function getAllTestRecords() {
     // VERSION 2: then update to proper select (with join if one was needed) and aliases to match the variable names used in the front end
     //TODO: add back in the if-statmenet for postgresql
     // if (process.env.DATABASE_SYSTEM === DATABASE_SYSTEM_POSTGRESQL) {
-    const selectString = `SELECT t.id as "TestRecordId",
-            to_char(t.date_posted, 'dd-mm-yyyy') as "datePosted",
-            t.session_type as "sessionType",
-            t.why_study_request_needed as "whyStudyRequestNeeded",
-            t.approx_availability as "approxAvailability",
-            t.search_status as "searchStatus",
-            t.create_date_time as "studyRequestCreateDateTime",
+    const sqlString = `SELECT 
+            t.id as "testRecordId",
+            t.user_id as "testUserId",
+            t.test_some_string as "testRecordSomeString",
+            t.test_some_int as "testRecordSomeInt",
+            t.test_some_status as "testSomeStatus",
+            to_char(t.test_date_posted, 'dd-mm-yyyy') as "testRecordDatePosted",
+            t.create_date_time as "testRecordCreateDateTime"
         FROM test_record t
         ORDER BY t.id DESC;`;
     // } else {
@@ -28,7 +29,8 @@ export async function getAllTestRecords() {
     // }
     //TODO: add in couchbase sql once we've got a db up and running
 
-    const data = await query(selectString);
+    console.log(`DEBUG: sqlString = ${sqlString}`);
+    const data = await query(sqlString);
 
     return data.rows;
 }
@@ -50,6 +52,8 @@ export async function postTestRecord(newTestRecord) {
         ${newTestRecord.test_some_int},
         'new'
     );`; //TODO: replace 'new' with a CONST, ideally defined in config.js and imported
+
+    console.log(`DEBUG: sqlString = ${sqlString}`);
 
     const result = await query(sqlString);
     console.log({ result });

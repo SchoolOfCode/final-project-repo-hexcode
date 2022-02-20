@@ -1,4 +1,4 @@
-# SERVER REPO for Group Activity Arranging Application by Team HexCode
+# BACK END SERVER REPO for application that helps you arrage activities for large groups more easily
 
 (Node.js -Express - REST API - PostgreSQL DB - Deployed on Heroku)
 

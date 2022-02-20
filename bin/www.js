@@ -7,5 +7,5 @@ const PORT = process.env.PORT || PORT_FALLBACK_VALUE;
 
 //remember app = express(), and express has been imported from 'express';
 app.listen(PORT, () => {
-    console.log(`HexCode live from www.js. Listening on PORT ${PORT}`);
+    console.log(`Reporting from www.js. Listening on PORT ${PORT}`);
 });

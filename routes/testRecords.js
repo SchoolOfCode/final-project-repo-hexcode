@@ -7,7 +7,7 @@ const router = express.Router();
 // Remember- the main difference (between express() and express.router()) is that express() is a top level function, which means it performs core functionality for the library and it contains its own methods where, as a matter of fact, Router is one, and that is why when we create a specific router we chain the Router() method on express , kind of like how we use app.
 
 //START DEBUG
-console.log(`DEBUG: testRecords:We have reached routes/testRecords.js script`);
+console.log(`DEBUG: routes/testRecords.js - reached script start`);
 // Note: router.use will be middleware that is specific to this router
 // router.use(() => {
 //     console.log(
@@ -17,11 +17,15 @@ console.log(`DEBUG: testRecords:We have reached routes/testRecords.js script`);
 //END DEBUG
 
 router.get("/", async (req, res) => {
-    console.log(
-        `DEBUG: testRecords: We have reached the router.get base function`
-    );
+    console.log(`DEBUG: routes/testRecords.js - router.get for / - start`);
 
     const searchResults = await getAllTestRecords();
+
+    console.log(
+        `DEBUG: routes/testRecords.js - router.get for / - searchResults retrieved`
+    );
+
+    console.log(`DEBUG: searchResults = `, { searchResults });
 
     res.json({
         success: true,
@@ -29,8 +33,12 @@ router.get("/", async (req, res) => {
         payload: searchResults,
     }); //TODO: Add in 'status' to select sql etc. and update this to Open-only select query
 
-    //temp - print out res to test
-    // console.log("DEBUG: testRecords: Results from getAllTestRecords are: ", res);
+    console.log(
+        `DEBUG: routes/testRecords.js - router.get for / - RESULTS retrieved`
+    );
+
+    console.log(`DEBUG: res = `, { res });
+
     return;
 });
 
