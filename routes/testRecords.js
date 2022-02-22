@@ -3,7 +3,7 @@ import express from "express";
 import { getAllTestRecords, postTestRecord } from "../models/testRecords.js";
 //TODO: remember to add the postStudyRequest(?) into the export.
 
-const router = express.Router();
+const testRecordRoutes = express.Router();
 // Remember- the main difference (between express() and express.router()) is that express() is a top level function, which means it performs core functionality for the library and it contains its own methods where, as a matter of fact, Router is one, and that is why when we create a specific router we chain the Router() method on express , kind of like how we use app.
 
 //START DEBUG
@@ -16,7 +16,7 @@ console.log(`DEBUG: routes/testRecords.js - reached script start`);
 // });
 //END DEBUG
 
-router.get("/", async (req, res) => {
+testRecordRoutes.get("/", async (req, res) => {
     console.log(`DEBUG: routes/testRecords.js - router.get for / - start`);
 
     const searchResults = await getAllTestRecords();
@@ -42,7 +42,8 @@ router.get("/", async (req, res) => {
     return;
 });
 
-router.post("*", async function (req, res) {
+//TODO: this route needs to be fixed - shouldn't route all posts  for /testrecords/* to the post-function.
+testRecordRoutes.post("*", async function (req, res) {
     const postResults = await postTestRecord(req.body);
 
     res.json({
@@ -52,4 +53,4 @@ router.post("*", async function (req, res) {
     });
 });
 
-export default router;
+export default testRecordRoutes;

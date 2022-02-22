@@ -1,6 +1,9 @@
 //set up express, and the routes
 import express from "express";
+
+// TODO: as we write router files, add import  for each:
 import testRecordRoutes from "./routes/testRecords.js"; //FYI we could call this (testRecordRoutes) anything suitable - it's an alias for router defined inside routes/testRecords.js
+// import usersRoutes from
 
 const app = express();
 
@@ -20,6 +23,8 @@ app.use(
 
 // TODO: as we write router files, add app.use for each:
 app.use("/testrecords", testRecordRoutes);
+
+// app.use("/users", usersRoutes);
 
 export default app;
 // FYI the database PORT is now covered in bin/www.js

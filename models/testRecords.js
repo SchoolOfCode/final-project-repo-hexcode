@@ -5,6 +5,17 @@ import {
     DATABASE_SYSTEM_COUCHBASE,
 } from "../config.js";
 
+//------------------------------
+// Test Record will look like:
+//------------------------------
+// testRecordId
+// testUserId
+// testRecordSomeString
+// testRecordSomeIn,
+// testSomeStatus    - TODO: change tois to testRecordSomeStatus
+// testRecordDatePosted
+// testRecordCreateDateTime
+
 export async function getAllTestRecords() {
     // VERSION 1: First, for basic test,  just do a simple select
     // const data = await query(`SELECT * FROM test_record;`);

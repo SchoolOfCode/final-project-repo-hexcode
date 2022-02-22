@@ -19,12 +19,12 @@ async function executeSQL() {
 
     const res = await query(sqlString);
     console.log(
-        "DEBUG: db/scripts/createTestRecordTable.js: Created table",
+        "DEBUG: db/migrations/createTestRecordTable.js: Created table",
         res
     );
 }
 console.log(
-    "DEBUG: db/scripts/createTestRecordTable.js: about to attempt to execute create table sql"
+    "DEBUG: db/migrations/createTestRecordTable.js: about to attempt to execute create table sql"
 );
 
 executeSQL();

@@ -9,10 +9,17 @@
         "start": "node ./bin/www.js",
         "dev": "nodemon -r dotenv/config  ./bin/www.js",
         "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-        "db-create-test-record-table": "node -r dotenv/config ./db/scripts/createTestRecordTable.js",
-        "db-drop-test-record-table": "node -r dotenv/config ./db/scripts/dropTestRecordTable.js",
-        "db-populate-test-record-table": "node -r dotenv/config ./db/scripts/populateTestRecordTable.js",
-        "db-deploy-test-record-table": "npm run db-drop-test-record-table && npm run db-create-test-record-table && npm run db-populate-test-record-table"
+        "db-create-user-table": "node -r dotenv/config ./db/migrations/createUserTable.js",
+        "db-drop-user-table": "node -r dotenv/config ./db/migrations/dropUserTable.js",
+        "db-seed-user-table": "node -r dotenv/config ./db/seeds/seedUserTable.js",
+        "db-create-event-table": "node -r dotenv/config ./db/migrations/createEventTable.js",
+        "db-drop-event-table": "node -r dotenv/config ./db/migrations/dropEventTable.js",
+        "db-seed-event-table": "node -r dotenv/config ./db/seeds/seedEventTable.js",
+        "db-deploy-all-tables": "npm run db-drop-event-table && npm run db-drop-user-table && npm run db-create-user-table && npm run db-create-event-table && npm run db-seed-user-table && npm run db-seed-event-table",
+        "db-create-test-record-table": "node -r dotenv/config ./db/migrations/createTestRecordTable.js",
+        "db-drop-test-record-table": "node -r dotenv/config ./db/migrations/dropTestRecordTable.js",
+        "db-seed-test-record-table": "node -r dotenv/config ./db/seeds/seedTestRecordTable.js",
+        "db-deploy-test-record-table": "npm run db-drop-test-record-table && npm run db-create-test-record-table && npm run db-seed-test-record-table"
     },
     "repository": {
         "type": "git",
