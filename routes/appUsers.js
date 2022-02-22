@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAllAppUsers } from "../models/appUsers.js";
+import { getAllAppUsers, getAppUserById } from "../models/appUsers.js";
 
 const appUserRoutes = express.Router();
 
@@ -15,11 +15,22 @@ appUserRoutes.get("/", async (req, res) => {
         message: `Retrieved all app users`,
         payload: searchResults,
     });
-
-    return;
+    //return;
 });
 
 // GET ONE APP USER, FOR A SPECIFIC APP USER ID
+appUserRoutes.get(`/:id`, async (req, res) => {
+    const appUserId = req.params.id;
+    const searchResults = await getAppUserById(appUserId);
+
+    res.json({
+        success: true,
+        message: `Retrieved all app users`,
+        payload: searchResults,
+    });
+
+    // return;
+});
 
 // INSERT ONE APP USER (POST) - Beyond MVP
 
