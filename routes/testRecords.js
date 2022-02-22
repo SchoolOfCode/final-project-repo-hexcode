@@ -1,13 +1,12 @@
 import express from "express";
 
 import { getAllTestRecords, postTestRecord } from "../models/testRecords.js";
-//TODO: remember to add the postStudyRequest(?) into the export.
 
 const testRecordRoutes = express.Router();
-// Remember- the main difference (between express() and express.router()) is that express() is a top level function, which means it performs core functionality for the library and it contains its own methods where, as a matter of fact, Router is one, and that is why when we create a specific router we chain the Router() method on express , kind of like how we use app.
+// Remember- the main difference (between express() vs.  express.router()) is that express() is a top level function, which means it performs core functionality for the library and it contains its own methods where, as a matter of fact, Router is one, and that is why when we create a specific router we chain the Router() method on express , kind of like how we use app.
 
 //START DEBUG
-console.log(`DEBUG: routes/testRecords.js - reached script start`);
+console.log(`DEBUG: routes/testRecords.js: script start`);
 // Note: router.use will be middleware that is specific to this router
 // router.use(() => {
 //     console.log(

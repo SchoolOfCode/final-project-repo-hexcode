@@ -3,7 +3,8 @@ import express from "express";
 
 // TODO: as we write router files, add import  for each:
 import testRecordRoutes from "./routes/testRecords.js"; //FYI we could call this (testRecordRoutes) anything suitable - it's an alias for router defined inside routes/testRecords.js
-// import usersRoutes from
+import appUserRoutes from "./routes/appUsers.js";
+import eventRoutes from "./routes/events.js";
 
 const app = express();
 
@@ -23,8 +24,8 @@ app.use(
 
 // TODO: as we write router files, add app.use for each:
 app.use("/testrecords", testRecordRoutes);
-
-// app.use("/users", usersRoutes);
+app.use("/events", eventRoutes);
+app.use("/appusers", appUserRoutes);
 
 export default app;
 // FYI the database PORT is now covered in bin/www.js
