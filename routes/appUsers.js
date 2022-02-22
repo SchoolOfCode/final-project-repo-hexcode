@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAllAppUsers } from "../models/appUsersX.js";
+import { getAllAppUsers } from "../models/appUsers.js";
 
 const appUserRoutes = express.Router();
 

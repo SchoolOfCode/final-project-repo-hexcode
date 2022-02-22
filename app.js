@@ -4,7 +4,7 @@ import express from "express";
 // TODO: as we write router files, add import  for each:
 import testRecordRoutes from "./routes/testRecords.js"; //FYI we could call this (testRecordRoutes) anything suitable - it's an alias for router defined inside routes/testRecords.js
 
-import appUserRoutes from "./routes/appUsersX.js";
+import appUserRoutes from "./routes/appUsers.js";
 
 import eventRoutes from "./routes/events.js";
 
