@@ -1,6 +1,7 @@
 import query from "../connection.js";
 
-//20Jan2022 - Need to NOT send in a value for id column, because it messes up the auto-increment for subsequent inserts.
+//NB: Need to NOT send in a value for id column, because it messes up the auto-increment for subsequent inserts.
+//NB: Also no need to manually insert into any auto-populated columns, like CREATE_DATE_TIME
 const sqlString = `INSERT INTO test_record(
     user_id , 
     test_some_string, 
@@ -19,13 +20,10 @@ async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
 
     const res = await query(sqlString);
-    console.log(
-        "DEBUG: db/scripts/populateTestRecordTable.js: populated table",
-        res
-    );
+    console.log("DEBUG: db/seeds/seedTestRecordTable.js: seeded table", res);
 }
 
 console.log(
-    "DEBUG: db/scripts/populateTestRecordTable.js: about to attempt to execute populate table sql"
+    "DEBUG: db/seeds/seedTestRecordTable.js: about to attempt to execute seed table sql"
 );
 executeSQL();

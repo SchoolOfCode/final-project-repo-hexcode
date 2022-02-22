@@ -275,7 +275,7 @@ Note: We can do further tests as we create the database files (see DATABASE - PA
 
 ---
 
-# DATABASE - PART 2 - CODE
+# DATABASE - PART 2 - CODE TODO: Hi HexCode people - Sinead here - i need to edit this to change it to our porject script names etc.
 
 ## Database Batch Scripts (run once for setup)
 
