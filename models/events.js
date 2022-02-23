@@ -59,7 +59,6 @@ export async function getEventById(eventId) {
 export async function postEvent(newEvent) {
     console.log({ newEvent });
 
-    //20Jan2022 - don't forget that any of the values that are strings ALSO need single quotes around them - see below
     // const sqlString = `INSERT INTO buddy_searches(
     //     user_id,
     //     session_type,

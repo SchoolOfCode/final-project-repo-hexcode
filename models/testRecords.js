@@ -49,7 +49,6 @@ export async function getAllTestRecords() {
 export async function postTestRecord(newTestRecord) {
     console.log({ newTestRecord });
 
-    //NOTE: don't forget that any of the values that are strings ALSO need single quotes around them - see below
     // NOTE: do not insert into (i) id (auto-incremented and created), (ii) create_date_time (auto-created), nor possiblly (iii) test_date_posted (if you want to capture as default today always)
     const sqlString = `INSERT INTO test_record(
         user_id,
@@ -59,7 +58,7 @@ export async function postTestRecord(newTestRecord) {
     )
     VALUES(
         $1,
-        '$2',
+        $2,
         $3,
         'new'
     );`; //TODO: replace 'new' with a CONST, ideally defined in config.js and imported
