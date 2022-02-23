@@ -1,22 +1,7 @@
 import express from "express";
-
 import { getAllAppUsers, getAppUserById } from "../models/appUsers.js";
-
 const appUserRoutes = express.Router();
-
-console.log(`DEBUG: routes/appUsers.js: script start`);
-
-// GET ALL APP USERS - Really just to test. Probably won't need this on front end.
-appUserRoutes.get("/", async (req, res) => {
-    const searchResults = await getAllAppUsers();
-
-    res.json({
-        success: true,
-        message: `Retrieved all app users`,
-        payload: searchResults,
-    });
-    //return;
-});
+// console.log(`DEBUG: routes/appUsers.js: script start`);
 
 // GET ONE APP USER, FOR A SPECIFIC APP USER ID
 appUserRoutes.get(`/:id`, async (req, res) => {
@@ -28,8 +13,19 @@ appUserRoutes.get(`/:id`, async (req, res) => {
         message: `Retrieved all app users`,
         payload: searchResults,
     });
+});
 
-    // return;
+// GET ALL APP USERS - Test only - Almost definitely won't actually need on front end.
+appUserRoutes.get("/", async (req, res) => {
+    const searchResults = await getAllAppUsers();
+
+    res.json({
+        success: true,
+        message: `Retrieved all app users`,
+        payload: searchResults,
+    });
+
+    return;
 });
 
 // INSERT ONE APP USER (POST) - Beyond MVP
