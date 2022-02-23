@@ -6,7 +6,7 @@ export async function getAllAppUsers() {
         FROM app_user au
         ORDER BY au.id DESC;`;
 
-    // VERSION 2: TODO: then update to proper select (with join if one was needed) and aliases to match the variable names used in the front end
+    // VERSION 2: TODO: IF NEEDED (PROBABLY WON'T BE NEEDED)-  update to proper select (with join if one was needed) and aliases to match the variable names used in the front end
 
     console.log(`DEBUG: sqlString = ${sqlString}`);
 
@@ -33,7 +33,7 @@ export async function getAppUserById(appUserId) {
                         au.app_user_profile_pic_link as "appUserProfilePicLink",
                         au.create_date_time  as "createDateTime"
     FROM app_user au
-    WHERE au.id = $1;`; //TODO: refactor to use params and an array
+    WHERE au.id = $1;`;
 
     const sqlStringParams = [appUserId];
 

@@ -1,10 +1,5 @@
 import query from "../db/connection.js";
 
-import {
-    DATABASE_SYSTEM_POSTGRESQL,
-    DATABASE_SYSTEM_COUCHBASE,
-} from "../config.js";
-
 //------------------------------
 // Test Record will look like:
 //------------------------------
@@ -12,7 +7,7 @@ import {
 // testUserId
 // testRecordSomeString
 // testRecordSomeIn,
-// testSomeStatus    - TODO: change tois to testRecordSomeStatus
+// testSomeStatus    - TODO: change this (in database and throughout) to testRecordSomeStatus
 // testRecordDatePosted
 // testRecordCreateDateTime
 
@@ -21,8 +16,6 @@ export async function getAllTestRecords() {
     // const data = await query(`SELECT * FROM test_record;`);
 
     // VERSION 2: then update to proper select (with join if one was needed) and aliases to match the variable names used in the front end
-    //TODO: add back in the if-statmenet for postgresql
-    // if (process.env.DATABASE_SYSTEM === DATABASE_SYSTEM_POSTGRESQL) {
     const sqlString = `SELECT 
             t.id as "testRecordId",
             t.user_id as "testUserId",
@@ -33,12 +26,6 @@ export async function getAllTestRecords() {
             t.create_date_time as "testRecordCreateDateTime"
         FROM test_record t
         ORDER BY t.id DESC;`;
-    // } else {
-    //     console.log(
-    //         `models/testRecords.js: ERROR - enironment variable value for DATABASE_SYSTEM, ${process.env.DATABASE_SYSTEM}, not recognised. Accepted values are ${DATABASE_SYSTEM_POSTGRESQL} and ${DATABASE_SYSTEM_COUCHBASE}`
-    //     ); //TODO: replace with proper try-catch code
-    // }
-    //TODO: add in couchbase sql once we've got a db up and running
 
     console.log(`DEBUG: sqlString = ${sqlString}`);
     const data = await query(sqlString);
@@ -51,24 +38,29 @@ export async function postTestRecord(newTestRecord) {
 
     // NOTE: do not insert into (i) id (auto-incremented and created), (ii) create_date_time (auto-created), nor possiblly (iii) test_date_posted (if you want to capture as default today always)
     const sqlString = `INSERT INTO test_record(
-        user_id,
-        test_some_string,
-        test_some_int,
-        test_some_status
-    )
-    VALUES(
-        $1,
-        $2,
-        $3,
-        'new'
-    );`; //TODO: replace 'new' with a CONST, ideally defined in config.js and imported
+                            user_id,
+                            test_some_string,
+                            test_some_int,
+                            test_some_status
+                        )
+                        VALUES(
+                            $1,
+                            $2,
+                            $3,
+                            'new'
+                        );`; //TODO: replace 'new' with a CONST, ideally defined in config.js and imported
 
-    const sqlStringParams = [newTestRecord.testUserId,newTestRecord.testRecordSomeString,newTestRecord.testRecordSomeInt];
+    const sqlStringParams = [
+        newTestRecord.testUserId,
+        newTestRecord.testRecordSomeString,
+        newTestRecord.testRecordSomeInt,
+    ];
 
     console.log(`DEBUG: sqlString = ${sqlString}`);
 
     const result = await query(sqlString, sqlStringParams);
-    console.log({ result });
+
+    console.log(`DEBUG: `, { result });
 
     return result;
 }
