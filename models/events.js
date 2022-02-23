@@ -41,13 +41,15 @@ export async function getEventById(eventId) {
 
         FROM event e
         INNER JOIN app_user a ON e.user_id = a.id
-        WHERE e.id = ${eventId};`;
+        WHERE e.id = $1;`;
+
+        const sqlStringParams = [eventId];
 
     
 
     console.log(`DEBUG: sqlString = ${sqlString}`);
 
-    const data = await query(sqlString);
+    const data = await query(sqlString, sqlStringParams);
 
     console.log(`DEBUG: data.rows = ${data.rows}`);
 
@@ -58,20 +60,20 @@ export async function postEvent(newEvent) {
     console.log({ newEvent });
 
     //20Jan2022 - don't forget that any of the values that are strings ALSO need single quotes around them - see below
-    const sqlString = `INSERT INTO buddy_searches(
-        user_id,
-        session_type,
-        why_study_buddy,
-        approx_availability,
-        search_status
-    )
-    VALUES(
-         ${newBuddySearch.userId},
-        '${newBuddySearch.sessionType}',
-        '${newBuddySearch.whyStudyBuddy}',
-        '${newBuddySearch.approxAvailability}',
-        'open'
-    );`; //TODO: refactor to use params and an array
+    // const sqlString = `INSERT INTO buddy_searches(
+    //     user_id,
+    //     session_type,
+    //     why_study_buddy,
+    //     approx_availability,
+    //     search_status
+    // )
+    // VALUES(
+    //      ${newBuddySearch.userId},
+    //     '${newBuddySearch.sessionType}',
+    //     '${newBuddySearch.whyStudyBuddy}',
+    //     '${newBuddySearch.approxAvailability}',
+    //     'open'
+    // );`; //TODO: refactor to use params and an array
 
     const result = await query(sqlString);
     console.log({ result });

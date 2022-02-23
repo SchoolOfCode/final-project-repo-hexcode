@@ -58,15 +58,17 @@ export async function postTestRecord(newTestRecord) {
         test_some_status
     )
     VALUES(
-        ${newTestRecord.testUserId},
-        '${newTestRecord.testRecordSomeString}',
-        ${newTestRecord.testRecordSomeInt},
+        $1,
+        '$2',
+        $3,
         'new'
     );`; //TODO: replace 'new' with a CONST, ideally defined in config.js and imported
 
+    const sqlStringParams = [newTestRecord.testUserId,newTestRecord.testRecordSomeString,newTestRecord.testRecordSomeInt];
+
     console.log(`DEBUG: sqlString = ${sqlString}`);
 
-    const result = await query(sqlString);
+    const result = await query(sqlString, sqlStringParams);
     console.log({ result });
 
     return result;
