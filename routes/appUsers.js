@@ -1,7 +1,7 @@
 import express from "express";
 import { getAllAppUsers, getAppUserById } from "../models/appUsers.js";
 const appUserRoutes = express.Router();
-// console.log(`DEBUG: routes/appUsers.js: script start`);
+console.log(`DEBUG: routes/appUsers.js: script start`);
 
 // GET ONE APP USER, FOR A SPECIFIC APP USER ID
 appUserRoutes.get(`/:id`, async (req, res) => {
