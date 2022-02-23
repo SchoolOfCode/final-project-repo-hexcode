@@ -33,11 +33,13 @@ export async function getAppUserById(appUserId) {
                         au.app_user_profile_pic_link as "appUserProfilePicLink",
                         au.create_date_time  as "createDateTime"
     FROM app_user au
-    WHERE au.id = ${appUserId};`; //TODO: refactor to use params and an array
+    WHERE au.id = $1;`; //TODO: refactor to use params and an array
+
+    const sqlStringParams = [appUserId];
 
     console.log(`DEBUG: sqlString = ${sqlString}`);
 
-    const data = await query(sqlString);
+    const data = await query(sqlString, sqlStringParams);
 
     console.log(`DEBUG: data.rows = ${data.rows}`);
 
