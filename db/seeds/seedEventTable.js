@@ -3,7 +3,7 @@ import query from "../connection.js";
 //NB: Need to NOT send in a value for id column, because it messes up the auto-increment for subsequent inserts.
 //NB: Also no need to manually insert into any columns that hav a DEFAULT listed in the 'create table statement', like CREATE_DATE_TIME
 const sqlString = `INSERT INTO event(
-    user_id, 
+    organiser_id, 
     event_title, 
     event_description,
     event_location,
