@@ -57,7 +57,7 @@ export async function getEventById(eventId) {
 
 export async function postEvent(newEvent) {
     console.log({ newEvent });
-
+    // TODO: temporarily have removed 'event_date' from the insert - need to figure out correct format for the data and then add it back in.
     // const sqlString = `INSERT INTO event(
     //                     organiser_id,
     //                     event_title,
