@@ -1,0 +1,3 @@
+        "db-create-poll-table": "node -r dotenv/config ./db/migrations/createPollTable.js",
+        "db-drop-poll-table": "node -r dotenv/config ./db/migrations/dropPollTable.js",
+        "db-seed-poll-table": "node -r dotenv/config ./db/seeds/seedPollTable.js",
