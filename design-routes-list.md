@@ -4,11 +4,20 @@
 
 POST (INSERT) New Event - (USER_ID has to be passed in)- and returns new Event ID - needed by the Confirm Event Button in Frame 3 - Get Event for User
 
-FETCH ALL Events for a given user (users/12/events)
+FETCH ALL Events for a given user (users/12/events) - UPDATE: ASSUME THIS NEEDS BOTH EVENTS THE PERSON HAS ORGANISED and ONES THEY ARE INVITED TO.
 
 FETCH (SELECT) specific Event (based on EVENT_ID) - + organiser user info + invited contacts + any polls + discussions
 
 PATCH (UPDATE) Event: - to update Event attributes for a specific EVENT_ID
+
+## RSVP_Event
+
+-   will need
+    a POST (to add),  
+    a PATCH (to update when they RSVP to say attending/not attending)),
+    a DELETE (if someone is dis-invited- NOT the same as saying they're not attending)
+-   a GET ALL RSVPs for a specific parent EVENT_ID
+-   a GET ALL RSVPs for a specific parent APP_USER_ID
 
 ## (Event) Comments
 

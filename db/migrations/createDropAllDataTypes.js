@@ -1,4 +1,5 @@
-import query from "../connection.js";
+//TODO: add this to the package.json so it's part of the db-deploy-all-tables, and test
+import query from "../db/connection.js";
 
 async function executeSQL(sqlString) {
     console.log(`DEBUG: sqlString = ${sqlString}`);

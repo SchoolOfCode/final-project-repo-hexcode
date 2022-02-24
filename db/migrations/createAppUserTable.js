@@ -1,7 +1,7 @@
 import query from "../connection.js";
 
 const sqlString = `CREATE TABLE IF NOT EXISTS app_user 
-                        (id serial PRIMARY KEY,
+                        (app_user_id serial PRIMARY KEY,
                         app_user_first_name VARCHAR (30) DEFAULT NULL,
                         app_user_last_name VARCHAR (30) DEFAULT NULL,
                         app_user_email VARCHAR (30) NOT NULL,

@@ -7,7 +7,7 @@ import query from "../connection.js";
 // TODO: revisit the 'default null' column settings - some might be manadatory eg category?
 const sqlString = `CREATE TABLE IF NOT EXISTS event 
                          (id SERIAL PRIMARY KEY, 
-                          user_id INT, 
+                          organiser_id INT, 
                           event_title VARCHAR(50),
                           event_description VARCHAR(255) DEFAULT NULL,
                           event_location VARCHAR(255) DEFAULT NULL,

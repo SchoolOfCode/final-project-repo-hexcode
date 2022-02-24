@@ -41,7 +41,7 @@ testRecordRoutes.get("/", async (req, res) => {
     return;
 });
 
-//TODO: this route needs to be fixed - shouldn't route all posts  for /testrecords/* to the post-function.
+//TODO: should this post route go to a specific endpoint rather than picking up any POST events sent to /testrecords/?
 testRecordRoutes.post("*", async function (req, res) {
     const postResults = await postTestRecord(req.body);
 
