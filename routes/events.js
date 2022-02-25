@@ -1,12 +1,14 @@
 import express from "express";
-
+import { debugOut, infoOut } from "../utils/logging.js";
 import { getAllEvents, getEventById, postEvent } from "../models/events.js";
 
 const eventRoutes = express.Router();
 
-console.log(`DEBUG: routes/events.js: script start`);
+debugOut(`routes/events.js`, `script start`);
 
-// GET ALL  EVENTS (regardless of user id) - TEST ONLY - NOT NEEDED ON FRONT END
+// ************************************************
+//       GET ALL EVENTS
+// ************************************************
 eventRoutes.get("/", async (req, res) => {
     const searchResults = await getAllEvents();
 
@@ -17,33 +19,62 @@ eventRoutes.get("/", async (req, res) => {
     });
 });
 
-// GET ONE EVENT, based on a specific event id /events/:12, where 12 is an event_id
+// ************************************************
+//       GET ALL EVENTS for a given APP USER ID
+// ************************************************
+// N/A - see appUsers routes file instead.
+
+// ************************************************
+//       GET ONE EVENT for a given EVENT ID
+//       e.g.
+//       /events/:12, where 12 is an event_id
+// ************************************************
 eventRoutes.get(`/:id`, async (req, res) => {
     const eventId = req.params.id;
     const searchResults = await getEventById(eventId);
 
+    //TODO: add in try/catch code, and change success value depending on this.
     res.json({
         success: true,
-        message: `Retrieved event with id ${eventId}`,
+        message: `Retrieved event with event id ${eventId}`,
         payload: searchResults,
     });
 });
 
-// INSERT (POST)  a new event, for a specific app_user_id
-//TODO: should this post route go to a specific endpoint, rather than picking up any POST events sent to /events/?
+// ************************************************
+//       POST NEW EVENT for a given APP USER ID
+// ************************************************
 eventRoutes.post("*", async function (req, res) {
-    const postResults = await postEvent(req.body);
+    //TODO: put try/catch error code here
+
+    //insert a new event, just to the event table (none of the extra stuff)
+    //insert the event, and reeive bact the new event object, including new event id.
+    const postResults = await postEvent(req.body); //have updated postResults to contain newEventObject
+
+    debugOut(
+        `routes/events.js/POST`,
+        // `NEW EVENT_ID is: ${postResults.eventId}`
+        `NEW EVENT_ID is: ${postResults}`
+    );
+
+    //here - i can use the new event id (postResults.rows[0].id), to then post related records (invitees, comments etc) to other tables.
+    //TODO: add function call to post the organiser to the event_invitee table
+    //TODO: add function call to post the list of invitees to the event_invitee table (and firstly, to the app_users table if necessary, and to the contacts table if necessary)
 
     res.json({
         success: true,
         message: `Inserted new event record`,
-        payload: postResults,
+        //TODO: decide what we are returning - just event id, or the whole body?
+        // eventId: postResults.rows[0].event_id,
+        eventId: postResults,
+        payload: postResults, //currently postResults is just event id
     });
 });
 
-// GET ALL EVENTS FOR A SPECIFIC APP USER - /appusers/:2/events   where :2 is an app_user_id
-//QUESTION - should this be in the /appusers/route instead? But then the 'event' sql is in two files?
-
+// ************************************************
 // UPDATE an event (given an event_id) (probably a PATCH
+// ************************************************
+
+debugOut(`routes/events.js`, `script end`);
 
 export default eventRoutes;
