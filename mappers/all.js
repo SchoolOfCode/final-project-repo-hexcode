@@ -7,7 +7,9 @@ export const API_TO_DB_DIRECTION = "API_TO_DB_DIRECTION";
 // ***************************************************
 export function mapAppUser(whichDirection, entity) {
     // TODO: add error handling in case some of the values  are not defined on the incoming object, dbEntity?
+
     if (whichDirection === DB_TO_API_DIRECTION) {
+        //TODO: REFACTOR TO CORRECT COLUMN NAMES BEFORE USING
         return {
             appUserId: entity.app_user_id,
             appUserFirstName: entity.app_user_first_name,
@@ -18,6 +20,7 @@ export function mapAppUser(whichDirection, entity) {
         };
     }
     if (whichDirection === API_TO_DB_DIRECTION) {
+        //TODO: REFACTOR TO CORRECT COLUMN NAMES BEFORE USING
         return {
             app_user_id: entity.appUserId,
             app_user_first_name: entity.appUserFirstName,
@@ -44,9 +47,10 @@ export function mapEvent(whichDirection, entity) {
     // for a get request:
     // transform database column names into front end app names:
     if (whichDirection === DB_TO_API_DIRECTION) {
+        //TODO: REFACTOR TO CORRECT COLUMN NAMES BEFORE USING
         return {
-            id: entity.event_id,
-            organiserId: entity.organiser_id,
+            eventId: entity.event_id,
+            organiserUserId: entity.organiser_user_id,
             eventTitle: entity.event_title,
             eventDescription: entity.event_description,
             eventLocation: entity.event_location,
@@ -61,9 +65,10 @@ export function mapEvent(whichDirection, entity) {
     // for a post, put or patch request
     // transform front end app names into database column names
     if (whichDirection === API_TO_DB_DIRECTION) {
+        //TODO: REFACTOR TO CORRECT COLUMN NAMES BEFORE USING
         return {
-            event_id: entity.id, //TODO: Don't need this for a post - should i make a post special?
-            organiser_id: entity.organiserId,
+            event_id: entity.eventId, //TODO: Don't need this for a post - should i make a post special?
+            organiser_user_id: entity.organiserUserId,
             event_title: entity.eventTitle,
             event_description: entity.eventDescription,
             event_location: entity.eventLocation,
@@ -88,6 +93,7 @@ export function mapEvent(whichDirection, entity) {
 export function mapEventJoinOrganiserUser(whichDirection, entity) {
     // TODO: add error handling in case some of the values  are not defined on the incoming object, dbEntity?
     if (whichDirection === DB_TO_API_DIRECTION) {
+        //TODO: REFACTOR TO CORRECT COLUMN NAMES BEFORE USING
         return {
             eventId: entity.event_id,
             eventTitle: entity.event_title,
@@ -98,7 +104,7 @@ export function mapEventJoinOrganiserUser(whichDirection, entity) {
             eventRequirements: entity.event_requirements,
             eventCategory: entity.event_category,
             eventCreateDateTime: entity.event_create_date_time,
-            organiserId: entity.app_user_id,
+            organiserUserId: entity.app_user_id,
             organiserFirstName: entity.app_user_first_name,
             organiserLastName: entity.app_user_last_name,
             organiserEmail: entity.app_user_email,
@@ -108,6 +114,7 @@ export function mapEventJoinOrganiserUser(whichDirection, entity) {
     }
 
     if (whichDirection === API_TO_DB_DIRECTION) {
+        //TODO: REFACTOR TO CORRECT COLUMN NAMES BEFORE USING
         return {
             event_id: entity.eventId,
             event_title: entity.eventTitle,
@@ -118,7 +125,7 @@ export function mapEventJoinOrganiserUser(whichDirection, entity) {
             event_requirements: entity.eventRequirements,
             event_category: entity.eventCategory,
             event_create_date_time: entity.eventCreateDateTime,
-            app_user_id: entity.organiserId,
+            app_user_id: entity.organiserUserId,
             app_user_first_name: entity.organiserFirstName,
             app_user_last_name: entity.organiserLastName,
             app_user_email: entity.organiserEmail,

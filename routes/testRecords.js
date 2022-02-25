@@ -1,4 +1,5 @@
 import express from "express";
+import { debugOut, infoOut } from "../utils/logging.js";
 
 import { getAllTestRecords, postTestRecord } from "../models/testRecords.js";
 
@@ -51,5 +52,7 @@ testRecordRoutes.post("*", async function (req, res) {
         payload: postResults,
     });
 });
+
+console.log(`DEBUG: routes/testRecords.js: script end`);
 
 export default testRecordRoutes;

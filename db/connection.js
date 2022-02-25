@@ -2,9 +2,22 @@
 
 //Note the DATABASE_URL can be taken from Heroku, after the database has been created, and pasted into the .env file. The dotenv npm package copies anything from there into the equivalent process.env variable(s)
 import pg from "pg"; ///FYI the pg imported is an object
+import { DATABASE_URL } from "../config.js";
+
+//version before i set up DATABASE_URL in config.js.  Keep code until i've tested it
+// const pool = new pg.Pool({
+//     //set up connection string object
+//     connectionString: process.env.DATABASE_URL,
+//     max: 20,
+//     idleTimeoutMillis: 30000,
+//     connectionTimeoutMillis: 2000,
+//     ssl: {
+//         rejectUnauthorized: false,
+//     },
+// });
 const pool = new pg.Pool({
     //set up connection string object
-    connectionString: process.env.DATABASE_URL,
+    connectionString: DATABASE_URL,
     max: 20,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
