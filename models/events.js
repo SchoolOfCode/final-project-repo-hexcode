@@ -33,7 +33,7 @@ export async function getEventById(eventId) {
             e.event_requirements as "eventRequirements",
             e.event_category as "eventCategory",
             e.create_date_time as "eventCreateDateTime",
-            a.id as "organiserId",
+            a.id as "organiserUserId",
             a.app_user_first_name as "organiserFirstName",
             a.app_user_last_name as "organiserLastName" ,
             a.app_user_email as "organiserEmail" ,
@@ -41,7 +41,7 @@ export async function getEventById(eventId) {
             a.create_date_time as "organiserCreateDateTime"
 
         FROM event e
-        INNER JOIN app_user a ON e.organiser_id = a.id
+        INNER JOIN app_user a ON e.organiser_user_id = a.id
         WHERE e.id = $1;`;
 
     const sqlStringParams = [eventId];
@@ -57,6 +57,8 @@ export async function getEventById(eventId) {
 
 export async function postEvent(newEvent) {
     console.log({ newEvent });
+
+    //TODO: test if it wokrs if some of the incoming attributes are not there.
     // TODO: temporarily have removed 'event_date' from the insert - need to figure out correct format for the data and then add it back in.
     // const sqlString = `INSERT INTO event(
     //                     organiser_id,

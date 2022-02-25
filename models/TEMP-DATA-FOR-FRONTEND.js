@@ -1,3 +1,28 @@
+//TESTS
+GET for /appusers/
+GET for /appusers/3
+GET for /events/
+GET for /events/2
+GET for /testrecords/
+
+POST for /events/
+    .organiserId,
+    .eventTitle,
+    .eventDescription,
+    .eventLocation,
+    .eventTime,
+    .eventRequirements,
+    .eventCategory,
+    {
+        "organiserId" : 2,
+        "eventTitle" : "test another event",
+        "eventDescription" : "test another description",
+        "eventLocation" : "dublin",
+        "eventTime" : "6pm",
+        "eventRequirements" : "bring shoes",
+        "eventCategory" : "guinness"
+        }
+
 // ROUTES:
 
 // GET all users - https://hexcode-arrange-group-event.herokuapp.com/appusers/  (which i don't think we'll need)
