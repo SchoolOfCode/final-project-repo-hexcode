@@ -48,7 +48,7 @@ export async function postTestRecord(newTestRecord) {
                             $2,
                             $3,
                             'new'
-                        );`; //TODO: replace 'new' with a CONST, ideally defined in config.js and imported
+                        ) RETURNING *;`; //TODO: replace 'new' with a CONST, ideally defined in config.js and imported
 
     const sqlStringParams = [
         newTestRecord.testUserId,

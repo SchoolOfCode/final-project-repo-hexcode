@@ -2,18 +2,21 @@ import query from "../connection.js";
 
 //NB: Need to NOT send in a value for id column, because it messes up the auto-increment for subsequent inserts.
 //NB: Also no need to manually insert into any auto-populated columns, like CREATE_DATE_TIME
-const sqlString = `INSERT INTO app_user(
-    app_user_first_name , 
-    app_user_last_name, 
-    app_user_email,
-    app_user_profile_pic_link)
+const sqlString = `INSERT INTO app_user
+    (
+        app_user_email,
+        app_user_has_account,
+        app_user_first_name , 
+        app_user_last_name, 
+        app_user_profile_pic_link
+    )
 
     VALUES
-        ('Belinda','Duffy','luke@gmailtest.com', '1.png'),
-        ('Maria','Rushmore','luke@gmailtest.com', '2.png'),
-        ('Akiko','Jones','luke@gmailtest.com', '3.png'),
-        ('Dave','Milton','dave@gmailtest.com', '4.png'),
-        ('Luke','Stansell','luke@gmailtest.com', '5.png');`;
+        ('belinda@belinda.com', TRUE, 'Belinda','Duffy', '1.png'),
+        ('maria@maria.com', TRUE, 'Maria','Rushmore', '2.png'),
+        ('akiko@akiko.com', FALSE, 'Akiko','Jones', '3.png'),
+        ('dave@dave.com', TRUE, 'Dave','Milton', '4.png'),
+        ('luke@luke.com', TRUE, 'Luke','Stansell', '5.png');`;
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
