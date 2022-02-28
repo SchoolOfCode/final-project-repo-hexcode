@@ -8,8 +8,10 @@ const sqlString = `CREATE TABLE IF NOT EXISTS poll
                         poll_category VARCHAR(255),
                         poll_multiple_votes_allowed BOOL DEFAULT FALSE,
                         poll_status VARCHAR(10) DEFAULT 'OPEN',
-                        poll_create_date_time TIMESTAMP NOT NULL DEFAULT CURRENT_DATE
+                        poll_create_date_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
                         )`;
+//BUG FIX - TIME not saving in createdatetime: Replacing TIMESTAMP NOT NULL DEFAULT CURRENT_DATE with TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+
 // TODO: refactor to include a foreign key constraint to the id in the user table:
 // CONSTRAINT fk_user
 // FOREIGN KEY(event_id)

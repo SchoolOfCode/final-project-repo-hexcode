@@ -13,6 +13,7 @@ const sqlString = `CREATE TABLE IF NOT EXISTS test_record
 // create_date_time TIMESTAMP NOT NULL DEFAULT CURRENT_DATE
 // with
 // create_date_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+//UPDATE - tested the above and it worked.
 
 // NOTE: in a real table, user_id column would be a foreign key to the id in the user table, and the create statement would include something like:
 // CONSTRAINT fk_user
