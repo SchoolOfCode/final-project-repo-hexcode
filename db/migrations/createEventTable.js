@@ -17,12 +17,12 @@ const sqlString = `CREATE TABLE IF NOT EXISTS event
                           event_category VARCHAR(50) DEFAULT NULL,
                           event_create_date_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
                           )`;
-//BUG FIX - TIME not saving in createdatetime: Replacing TIMESTAMP NOT NULL DEFAULT CURRENT_DATE with TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-
-// // TODO: refactor to include a foreign key constraint to the id in the user table:
-// CONSTRAINT fk_user
+// TODO: refactor to include relevant foreign key constraints:
+// CONSTRAINT fk_app_user
 // FOREIGN KEY(organiser_user_id)
-//    REFERENCES app_user(id)
+//    REFERENCES app_user(app_user_id)
+
+//BUG FIX - TIME not saving in createdatetime: Replacing TIMESTAMP NOT NULL DEFAULT CURRENT_DATE with TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
