@@ -7,9 +7,8 @@ const sqlString = `CREATE TABLE IF NOT EXISTS app_user
                          app_user_first_name VARCHAR (30) DEFAULT NULL,
                          app_user_last_name VARCHAR (30) DEFAULT NULL,
                          app_user_profile_pic_link VARCHAR (200),
-                         app_user_create_date_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+                         app_user_create_date_time  TIMESTAMP NOT NULL DEFAULT CURRENT_DATE
                         )`;
-//BUG FIX - TIME not saving in createdatetime: Replacing TIMESTAMP NOT NULL DEFAULT CURRENT_DATE with TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);

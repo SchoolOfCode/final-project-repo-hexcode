@@ -1,7 +1,6 @@
 import express from "express";
 import { debugOut, infoOut } from "../utils/logging.js";
 import { getAllEvents, getEventById, postEvent } from "../models/events.js";
-import { getAllCommentsForOneEvent } from "../models/comments.js";
 
 const eventRoutes = express.Router();
 
@@ -38,23 +37,6 @@ eventRoutes.get(`/:id`, async (req, res) => {
     res.json({
         success: true,
         message: `Retrieved event with event id ${eventId}`,
-        payload: searchResults,
-    });
-});
-
-// ************************************************
-//       GET ALL COMMENTS for a given EVENT ID
-//       e.g.
-//       /events/:12/comments/  where 12 is an event_id
-// ************************************************
-eventRoutes.get("/:id/comments", async (req, res) => {
-    const eventId = req.params.id;
-
-    const searchResults = await getAllCommentsForOneEvent(eventId);
-
-    res.json({
-        success: true,
-        message: `Retrieved all comments, plus authors for event id ${eventId}`,
         payload: searchResults,
     });
 });
