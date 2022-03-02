@@ -6,8 +6,10 @@ const sqlString = `CREATE TABLE IF NOT EXISTS comment
                         author_user_id INT,
                         comment_text VARCHAR (255) NOT NULL,
                         comment_date_posted DATE NOT NULL DEFAULT CURRENT_DATE,
-                        comment_create_date_time TIMESTAMP NOT NULL DEFAULT CURRENT_DATE
+                        comment_create_date_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
                         )`;
+// TODO: refactor to include relevant foreign key constraints
+//BUG FIX - TIME not saving in createdatetime: Replacing TIMESTAMP NOT NULL DEFAULT CURRENT_DATE with TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);

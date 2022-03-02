@@ -11,3 +11,22 @@ THEN UPDATED.
 
 WILL NEED TO EXPAND THIS TO INCLUDE THE NWER SCRIPTS (FOR EVENT_INVITEE AND CONTACT TABLES)
         "db-deploy-all-tables": "npm run db-drop-comment-table && npm run db-drop-poll-table && npm run db-drop-event-table && npm run db-drop-app-user-table && npm run db-create-app-user-table && npm run db-create-event-table && npm run db-create-poll-table && npm run db-create-comment-table && npm run db-seed-app-user-table && npm run db-seed-event-table && npm run db-seed-poll-table && npm run db-seed-comment-table",
+
+
+
+and this is the stuff i removed:
+
+
+
+
+"db-temp-drop-poll-table": "node -r dotenv/config ./db/migrations/tempDropPollTable.js",
+"db-temp-create-poll-table": "node -r dotenv/config ./db/migrations/tempCreatePollTable.js",
+"db-temp-seed-poll-table": "node -r dotenv/config ./db/seeds/tempSeedPollTable.js",
+"db-temp-drop-comment-table": "node -r dotenv/config ./db/migrations/tempDropCommentTable.js",
+"db-temp-create-comment-table": "node -r dotenv/config ./db/migrations/tempCreateCommentTable.js",
+"db-temp-seed-comment-table": "node -r dotenv/config ./db/seeds/tempSeedCommentTable.js",
+
+
+"db-temp-deploy-all-tables": "npm run db-temp-drop-comment-table && npm run db-temp-drop-poll-table && npm run db-drop-contact-table && npm run db-drop-event-invitee-table && npm run db-drop-event-table && npm run db-drop-app-user-table && npm run db-create-app-user-table && npm run db-create-event-table && npm run db-create-contact-table && npm run db-create-event-invitee-table && npm run db-temp-create-poll-table && npm run db-temp-create-comment-table && npm run db-seed-app-user-table && npm run db-seed-event-table && npm run db-seed-contact-table && npm run db-seed-event-invitee-table && npm run db-temp-seed-poll-table && npm run db-temp-seed-comment-table",
+
+    
