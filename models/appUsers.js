@@ -25,6 +25,34 @@ export async function getAllAppUsers() {
     return data.rows;
 }
 
+// ***********************************************************
+//       GET  APP USER for a given APP USER EMAIL (query)
+// ***********************************************************
+export async function getAppUserFromEmail(appUserEmail) {
+    const sqlString = `SELECT a.app_user_id as "appUserid",
+                        a.app_user_email as "appUserEmail",
+                        a.app_user_has_account as "appUserHasAccount",
+                        a.app_user_first_name as "appUserFirstName",
+                        a.app_user_last_name as "appUserLastName",
+                        a.app_user_profile_pic_link as "appUserProfilePicLink",
+                        a.app_user_create_date_time as "appUserCreateDateTime"
+                    FROM app_user a
+                    WHERE a.app_user_email = $1;`;
+
+    const sqlStringParams = [appUserEmail];
+
+    console.log(`DEBUG: sqlString = ${sqlString}`);
+
+    const data = await query(sqlString, sqlStringParams);
+
+    console.log(`DEBUG: data = `);
+    console.log(data);
+
+    // const appUserObject = data.rows[0];
+    const appUserObject = data.rows;
+    return appUserObject;
+}
+
 // ************************************************
 //     GET ONE APP USER for a given APP USER ID
 // ************************************************

@@ -1,6 +1,10 @@
 import express from "express";
 import { debugOut, infoOut } from "../utils/logging.js";
-import { getAllAppUsers, getAppUserById } from "../models/appUsers.js";
+import {
+    getAllAppUsers,
+    getAppUserById,
+    getAppUserFromEmail,
+} from "../models/appUsers.js";
 import { getAllEventsForOneUser } from "../models/events.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
 
 const appUserRoutes = express.Router();
@@ -22,9 +26,30 @@ appUserRoutes.get("/", async (req, res) => {
     return;
 });
 
+// ***********************************************************
+//       GET  APP USER for a given APP USER EMAIL (query)
+// ***********************************************************
+// FRONT END SENDs:   GET to  /appusers/search?email=user@user.com
+// eg http://localhost:3000/appusers/search?email=belinda@belinda.com
+//
+// FYI: Express parses query string parameters by default, and puts them into the req.query property
+appUserRoutes.get(`/search`, async (req, res) => {
+    // const appUserEmail = req.query["email"];
+    const appUserEmail = req.query.email;
+
+    const searchResults = await getAppUserFromEmail(appUserEmail);
+
+    res.json({
+        success: true,
+        message: `Retrieved app user with app user email of ${appUserEmail}`,
+        payload: searchResults,
+    });
+});
+
 // ************************************************
 //     GET ONE APP USER for a given APP USER ID
 // ************************************************
+// Express also supports named route parameters and puts them in the req.params object. Named route parameters are always strings, and Express automatically decodes them using decodeUriComponent().
 appUserRoutes.get(`/:id`, async (req, res) => {
     const appUserId = req.params.id;
     const searchResults = await getAppUserById(appUserId);
