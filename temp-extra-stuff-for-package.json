@@ -1,0 +1,13 @@
+ADD THE FOLLOWING BACK INTO PACKAGE.JSON ONCE THE REAL COMMENTS AND POLL SCRIPTS ARE MERGED INTO SAFETY-NET AND THEN MAIN, AND 
+THEN UPDATED.
+
+        "db-drop-poll-table": "node -r dotenv/config ./db/migrations/dropPollTable.js",
+        "db-create-poll-table": "node -r dotenv/config ./db/migrations/createPollTable.js",
+        "db-seed-poll-table": "node -r dotenv/config ./db/seeds/seedPollTable.js",
+        "db-drop-comment-table": "node -r dotenv/config ./db/migrations/dropCommentTable.js",
+        "db-create-comment-table": "node -r dotenv/config ./db/migrations/createCommentTable.js",
+        "db-seed-comment-table": "node -r dotenv/config ./db/seeds/seedCommentTable.js",
+
+
+WILL NEED TO EXPAND THIS TO INCLUDE THE NWER SCRIPTS (FOR EVENT_INVITEE AND CONTACT TABLES)
+        "db-deploy-all-tables": "npm run db-drop-comment-table && npm run db-drop-poll-table && npm run db-drop-event-table && npm run db-drop-app-user-table && npm run db-create-app-user-table && npm run db-create-event-table && npm run db-create-poll-table && npm run db-create-comment-table && npm run db-seed-app-user-table && npm run db-seed-event-table && npm run db-seed-poll-table && npm run db-seed-comment-table",
