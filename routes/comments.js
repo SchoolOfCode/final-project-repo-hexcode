@@ -1,10 +1,24 @@
 import express from "express";
 import { debugOut, infoOut } from "../utils/logging.js";
-import { postComment } from "../models/comments.js";
+import { getAllComments, postComment } from "../models/comments.js";
 
 const commentRoutes = express.Router();
 
 debugOut(`routes/comments.js`, `script start`);
+
+// *****************************************************
+//       GET ALL COMMENTS (regardless of event, author)
+//             (test purposes only)
+// *****************************************************
+commentRoutes.get("/", async (req, res) => {
+    const searchResults = await getAllComments();
+
+    res.json({
+        success: true,
+        message: `Retrieved all comments regardless of event or author - TEST PURPOSES ONLY`,
+        payload: searchResults,
+    });
+});
 
 // ************************************************
 //       GET ALL COMMENTS for a given EVENT ID
