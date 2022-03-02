@@ -7,6 +7,7 @@ import { debugOut, infoOut } from "../utils/logging.js";
 //       /events/:12/comments/  where 12 is an event_id
 // ************************************************
 export async function getAllCommentsForOneEvent(eventId) {
+    //02Mar2022 13:58 - force change
     const sqlString = `SELECT
             c.comment_id as "commentId", 
             c.comment_text as "commentText",
