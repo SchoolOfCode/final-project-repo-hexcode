@@ -7,15 +7,15 @@ const eventRoutes = express.Router();
 
 debugOut(`routes/events.js`, `script start`);
 
-// ************************************************
-//       GET ALL EVENTS
-// ************************************************
+// ***************************************************************
+//       GET ALL EVENTS (regardless of user - test purposes only)
+// ***************************************************************
 eventRoutes.get("/", async (req, res) => {
     const searchResults = await getAllEvents();
 
     res.json({
         success: true,
-        message: `Retrieved all events`,
+        message: `Retrieved all events regardless of user - TEST PURPOSES ONLY`,
         payload: searchResults,
     });
 });
