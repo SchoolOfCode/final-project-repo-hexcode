@@ -22,20 +22,14 @@ const sqlString = `INSERT INTO contact
         (1, 6, 'Tommy'),
         (1, 7, 'Magic Mary'),
         (2, 1, 'Bel'),
-        (2, 0, 'zzz'),
-        (2, 0, 'zzz'),
-        (3, 0, 'zzz'),
-        (3, 0, 'zzz'),
-        (3, 0, 'zzz'),
-        (3, 0, 'zzz'),
-        (4, 0, 'zzz'),
-        (4, 0, 'zzz'),
-        (4, 0, 'zzz'),
-        (5, 0, 'zzz'),
-        (5, 0, 'zzz'),
-        (5, 0, 'zzz'),
-        (5, 0, 'zzz'),
-        (5, 8, 'Uncle Mike');`;
+        (3, 1, 'Belinda'),
+        (3, 9, 'BFF Katie'),
+        (4, 1, 'Belinda'),
+        (4, 8, 'Brother Mike'),
+        (4, 9, 'Katie'),
+        (5, 1, 'Belinda'),
+        (5, 3, 'Akiko'),
+        (5, 7, 'Mary Murphy');`;
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
