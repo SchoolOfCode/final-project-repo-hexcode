@@ -16,15 +16,15 @@ const sqlString = `INSERT INTO comment
             comment_date_posted
         )
     VALUES
-        (1, 4, 'I cannot find parking - where are you all?', '2022-12-01'),
+        (1, 7, 'I cannot find parking - where are you all?', '2022-12-01'),
         (1, 3, 'We parked on Coders Lane', '2022-12-01'),
-        (2, 2, 'I am super excited to see everyone next week!', '2022-11-30'),
+        (2, 7, 'I am super excited to see everyone next week!', '2022-11-30'),
         (2, 1, 'Me too! What are you planning on wearing?', '2022-11-29'),
         (3, 5, 'Hey, I am lost where is everyone?', '2022-12-01'),
-        (3, 1, 'We are down at the docks unloading the kayaks', '2022-12-01'),
-        (4, 2, 'Will be great to catch up with all the fam next week!', '2022-11-30'),
+        (3, 7, 'We are down at the docks unloading the kayaks', '2022-12-01'),
+        (4, 4, 'Will be great to catch up with all the fam next week!', '2022-11-30'),
         (4, 1, 'Me too! Will be lovely to see mum again', '2022-11-30'),
-        (4, 3, 'Who is bringing the cake?', '2022-11-30')
+        (4, 8, 'Who is bringing the cake?', '2022-11-30')
         ;`;
 
 async function executeSQL() {

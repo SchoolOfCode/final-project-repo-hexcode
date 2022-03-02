@@ -18,8 +18,22 @@ const sqlString = `INSERT INTO event_invitee
             event_invitee_rsvp_logged_date_time
         )
     VALUES
-        (1, 5, 1, 'TBC', NULL),
-        (1, 3, 1, 'TBC', NULL);`;
+        (1, 1, 1, 'GOING', NULL),
+        (1, 1, 2, 'TBC', NULL),
+        (1, 1, 3, 'GOING', NULL),
+        (1, 1, 4, 'GOING', NULL),
+        (1, 1, 7, 'GOING', NULL),
+        (2, 1, 1, 'GOING', NULL),
+        (2, 1, 3, 'GOING', NULL),
+        (2, 1, 7, 'GOING', NULL),
+        (2, 3, 9, 'GOING', NULL),
+        (3, 1, 1, 'GOING', NULL),
+        (3, 1, 5, 'GOING', NULL),
+        (3, 5, 7, 'GOING', NULL),
+        (4, 4, 4, 'GOING', NULL),
+        (4, 4, 1, 'GOING', NULL),
+        (4, 4, 8, 'GOING', NULL),
+        (4, 4, 9, 'TBC', NULL);`;
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);

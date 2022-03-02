@@ -40,12 +40,18 @@
 (remember - only FULL users can hold contact lists)
 
 ```
-    Belinda (1) has contacts of: Maria from school(2); Akiko (3); Uncle Dave (4); Luke S (5); Tommy (6); Magic Mary (7)
+    Belinda (1) has contacts of:
+        Maria from school (2);
+        Akiko (3);
+        Uncle Dave (4);
+        Luke S (5);
+        Tommy (6);
+        Magic Mary (7)
 
     Maria (2) has contacts of: Bel (1);
-    Akiko (3) has contacts of: Belinda (1);
+    Akiko (3) has contacts of: Belinda (1); BFF Katie (9);
     Dave (4) has contacts of: Belinda (1);  Brother Mike (8); Katie (9);
-    Luke (5) has contacts of: TBC
+    Luke (5) has contacts of: Belinda (1), Akiko (3), Mary Murphy (7)
 ```
 
 ---
@@ -58,13 +64,18 @@
     'Mary 31st Birthday Dinner', 'Let us arrange dinner at Marcos restaurant for Marys birthday. I will set up a poll for dates', 'Marcos Restaurant', NULL, '8pm', 'No gifts - just bring yourselves', 'Dinner'),
 ```
 
-Organised by: Belinda(1) \
-Invited: X (by Y) \
-Invited: X (by Y)
+Organised by: Belinda(1)
+
+-   Invited: Belinda(1) (by herself, as the organiser)
+-   Invited: Maria from school (2) (by Belinda (1))
+-   Invited: Akiko (3) (by Belinda (1))
+-   Invited: Uncle Dave (4) (by Belinda (1))
+-   Invited: Magic Mary (7) (by Belinda (1))
 
 Comments:
 
-invited (and commenting) are 4 (dave) 3 (akiko) plus
+-   Event 1, Magic Mary 7, 'I cannot find parking - where are you all?', '2022-12-01'),
+-   Event 1, Akiko 3, 'We parked on Coders Lane', '2022-12-01'),
 
 ---
 
@@ -75,36 +86,58 @@ invited (and commenting) are 4 (dave) 3 (akiko) plus
     invited (and commenting) are 2(maria) 1 (belinda) plus
 ```
 
-Organised by: Belinda(1) \
-Invited: X (by Y) \
-Invited: X (by Y)
+Organised by: Belinda(1)
+
+-   Invited: Belinda(1) (by herself, as the organiser)
+-   Invited: Akiko (3) (by Belinda (1))
+-   Invited: Magic Mary (7) (by Belinda (1))
+-   Invited: BFF Katie (9) (by Akiko (3))
 
 Comments:
+
+-   Event 2, Magic Mary (7), 'I am super excited to see everyone next week!', '2022-11-30'), \
+-   Event 2, Belinda (1), 'Me too! What are you planning on wearing?', '2022-11-29'),
 
 ---
 
 ### event_id 3 = Sea Kayaking
 
-````
+```
     event_id 3 = sea kayaking', 'Let us book in the next sea kayaking evening', 'Shadwell Basin', '2022-05-16', '6pm', 'kayakys provided. Bring wetsuits', 'Exercise'),
+
     invited (and commenting)are 5 (luke) and 1(belinda) plus
-    ```
-Organised by: Belinda(1) \
-Invited: X (by Y) \
-Invited: X (by Y)
+```
+
+Organised by: Belinda(1)
+
+-   Invited: Belinda(1) (by herself, as the organiser)
+-   Invited: Luke (5) (by Belinda(1))
+-   Invited: Mary Murphy/ Magic Mary (7) (by Luke (5))
 
 Comments:
+
+-   Event 3, Luke (5), 'Hey, I am lost where is everyone?', '2022-12-01'), -
+-   Event 3, Mary Murphy/ Magic Mary (7), 'We are down at the docks unloading the kayaks', '2022-12-01'),
 
 ---
 
 ### event_id 4 = Birthday Party for Mum
-````
 
+```
     event_id 4 = 'birthday party for Mum', 'Let us book in a date for gathering at mums house for her birthday', 'Mums House', '2022-06-15', '6pm', 'Bring food', 'Family Gathering');`;
-    invited (and commenting)are 2 (maria) 1(belinda) 3(akiko), plus
+    invited (and commenting)are 2 (maria) 1(belinda) 3(akiko), plus \
 
 ```
-Organised by: Dave / Uncle Dave (4) \
-Invited: X (by Y) \
-Invited: X (by Y)
-```
+
+Organised by: Dave / Uncle Dave (4)
+
+-   Invited: Dave / Uncle Dave (4) (by himself, as the organiser)
+-   Invited: Belinda (1) (by Dave (4))
+-   Invited: Brother Mike (8) (by Dave (4))
+-   Invited: Katie (9) (by Dave (4))
+
+Comments:
+
+-   Event 4, Dave / Uncle Dave (4), 'Will be great to catch up with all the fam next week!', '2022-11-30'),
+-   Event 4, Belinda (1), 'Me too! Will be lovely to see mum again', '2022-11-30'),
+-   Event 4, Brother Mike (8), 'Who is bringing the cake?', '2022-11-30')
