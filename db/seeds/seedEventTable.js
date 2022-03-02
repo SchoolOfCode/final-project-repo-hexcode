@@ -1,7 +1,12 @@
 import query from "../connection.js";
 
-//NB: Need to NOT send in a value for id column, because it messes up the auto-increment for subsequent inserts.
-//NB: Also no need to manually insert into any columns that hav a DEFAULT listed in the 'create table statement', like CREATE_DATE_TIME
+// **********************************************************************
+// NB - SEE readme-how-data-relates.md BEFORE ADDING/CHANGING THIS DATA
+// **********************************************************************
+// NB - organiser_user_id can ONLY be 1 to 5 (i.e. only full users can organise events)
+//
+// NB: DO NOT INSERT into main id field (event_id) - messes up the auto-increment for subsequent inserts
+// NB: DO NOT INSERT into the create data/time field (event_create_date_time) - it auto-populates
 const sqlString = `INSERT INTO event
                     (
                         organiser_user_id, 
@@ -22,13 +27,6 @@ const sqlString = `INSERT INTO event
                         (1, 'sea kayaking', 'Let us book in the next sea kayaking evening', 'Shadwell Basin', '2022-05-16', '6pm', 'kayakys provided. Bring wetsuits', 'Exercise'),
                         
                         (4, 'birthday party for Mum', 'Let us book in a date for gathering at mums house for her birthday', 'Mums House', '2022-06-15', '6pm', 'Bring food', 'Family Gathering');`;
-
-//FYI - the seeded organiser user records are:
-// 1 = Belinda
-// 2 = Maria
-// 3 = Akiko (invitee only)
-// 4 = Dave
-// 5 = Luke
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
