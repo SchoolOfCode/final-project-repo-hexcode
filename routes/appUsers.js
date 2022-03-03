@@ -5,7 +5,8 @@ import {
     getAppUserById,
     getAppUserFromEmail,
 } from "../models/appUsers.js";
-import { getAllEventsForOneUser } from "../models/events.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
+import { getAllEventsByAppUserId } from "../models/events.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
+import { getAllContactsByOwnerUserId } from "../models/contacts.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
 
 const appUserRoutes = express.Router();
 debugOut(`/routes/appUsers.js`, `script start`);
@@ -70,15 +71,32 @@ appUserRoutes.get(`/:id`, async (req, res) => {
 appUserRoutes.get("/:id/events", async (req, res) => {
     const appUserId = req.params.id;
 
-    const searchResults = await getAllEventsForOneUser(appUserId);
+    const searchResults = await getAllEventsByAppUserId(appUserId);
 
     res.json({
         success: true,
-        message: `Retrieved user ${appUserId}, plus all events for that user`,
+        message: `Retrieved all events (invited and organised) for user ${appUserId}`,
         payload: searchResults,
     });
 });
 
+// *********************************************************
+//       GET ALL CONTACTS for a given APP USER ID
+//       e.g.
+//       /appusers/:2/contacts/, where 2 is an app_user_id
+//********************************************************
+
+appUserRoutes.get("/:id/contacts", async (req, res) => {
+    const appUserId = req.params.id;
+
+    const searchResults = await getAllContactsByOwnerUserId(appUserId);
+
+    res.json({
+        success: true,
+        message: `Retrieved all contacts for user ${appUserId}`,
+        payload: searchResults,
+    });
+});
 //********************************************************
 // INSERT ONE APP USER (POST) - Beyond MVP
 //********************************************************
