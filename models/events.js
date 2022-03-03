@@ -1,9 +1,9 @@
 import query from "../db/connection.js";
 import { debugOut, infoOut } from "../utils/logging.js";
 
-// ************************************************
-//       GET ALL EVENTS
-// ************************************************
+// ***************************************************************
+//       GET ALL EVENTS (regardless of user - test purposes only)
+// ***************************************************************
 export async function getAllEvents() {
     const sqlString = `SELECT
         e.event_id as "eventId", 
@@ -143,45 +143,6 @@ export async function getAllEventsForOneUser(requestedUserId) {
     debugOut(`/models/events.js - getAllEventsForOneUser`, data.rows, true);
 
     return data.rows;
-
-    // TODO: replace this hardcoded object with a SQL SELECT(S) and code to map the results from the select, into a user object containing an array of event objects
-    // const tempUserWithEventsObject = [
-    //     {
-    //         appUserId: appUserId,
-    //         appUserEmail: "maria@maria.com",
-    //         appUserFirstName: "Maria",
-    //         appUserLastName: "Rushmore",
-    //         appUserProfilePicLink: "2.png",
-    //         appUserCreateDateTime: "2022-02-23T00:00:00.000Z",
-    //         appUserArrayOfEvents: [
-    //             {
-    //                 eventId: 17,
-    //                 eventTitle: "THIS EVENT IS HARDCODED",
-    //                 eventDescription:
-    //                     "Let us arrange dinner at Bella Vista restaurant",
-    //                 eventLocation: "Derby",
-    //                 eventDate: "2022-03-29",
-    //                 eventTime: "6pm",
-    //                 eventRequirements: "smart casual attire only",
-    //                 eventCategory: "Dinner",
-    //                 eventCreateDateTime: "2022-02-23T00:00:00.000Z",
-    //             },
-    //             {
-    //                 eventId: 12,
-    //                 eventTitle: "SO IS THIS ONE (HARDCODED)",
-    //                 eventDescription:
-    //                     "Let us arrange dinner at Marcos restaurant for Marys birthday. I will set up a poll for dates",
-    //                 eventLocation: "Marcos Restaurant",
-    //                 eventDate: "2022-03-28",
-    //                 eventTime: "8pm",
-    //                 eventRequirements: "No gifts - just bring yourselves",
-    //                 eventCategory: "Dinner",
-    //                 eventCreateDateTime: "2022-02-23T00:00:00.000Z",
-    //             },
-    //         ],
-    //     },
-    // ];
-    // return tempUserWithEventsObject;
 }
 
 // ************************************************

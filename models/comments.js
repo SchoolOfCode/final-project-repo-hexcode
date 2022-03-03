@@ -56,7 +56,7 @@ export async function getAllComments() {
 //       e.g.
 //       /events/:12/comments/  where 12 is an event_id
 // ************************************************
-export async function getAllCommentsForOneEvent(eventId) {
+export async function getAllCommentsByEvent(eventId) {
     const sqlString = `SELECT
             c.comment_id as "commentId", 
             c.comment_text as "commentText",
@@ -89,20 +89,16 @@ export async function getAllCommentsForOneEvent(eventId) {
 
     const sqlStringParams = [eventId];
     debugOut(
-        `/models/comments.js - getAllCommentsForOneEvent`,
+        `/models/comments.js - getAllCommentsByEvent`,
         `sqlString = ${sqlString}`
     );
 
     const data = await query(sqlString, sqlStringParams);
     debugOut(
-        `/models/comments.js - getAllCommentsForOneEvent`,
+        `/models/comments.js - getAllCommentsByEvent`,
         `data.rows = ${data.rows}`
     );
-    debugOut(
-        `/models/comments.js - getAllCommentsForOneEvent`,
-        data.rows,
-        true
-    );
+    debugOut(`/models/comments.js - getAllCommentsByEvent`, data.rows, true);
 
     return data.rows;
 }
@@ -116,8 +112,7 @@ export async function postComment(newComment) {
     debugOut(`/models/comments.js - postComment`, newComment, true);
 
     // TODO: test if it works if some of the incoming attributes are MISSING.
-    const sqlString = `INSERT INTO comment
-        (
+    const sqlString = `INSERT INTO comment(
             event_id,
             author_user_id,
             comment_text
