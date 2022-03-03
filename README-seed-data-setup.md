@@ -77,6 +77,14 @@ Comments:
 -   Event 1, Magic Mary 7, 'I cannot find parking - where are you all?', '2022-12-01'),
 -   Event 1, Akiko 3, 'We parked on Coders Lane', '2022-12-01'),
 
+Polls:
+
+-   Event 1, Belinda 1, 'Available Dates?', 'Hey guys which dates are you available?', 'Birthday party', FALSE, 'OPEN'
+
+Poll Options:
+
+-   TBC
+
 ---
 
 ### event_id 2 = Spa Day with the girls
@@ -95,10 +103,16 @@ Organised by: Belinda(1)
 
 Comments:
 
--   Event 2, Magic Mary (7), 'I am super excited to see everyone next week!', '2022-11-30'), \
+-   Event 2, Magic Mary (7), 'I am super excited to see everyone next week!', '2022-11-30'),
 -   Event 2, Belinda (1), 'Me too! What are you planning on wearing?', '2022-11-29'),
 
----
+Polls:
+
+-   Event 2, Belinda (1), 'Favourite Day?', 'Girls please pick your fav day!', 'SPA & champagne', FALSE, 'OPEN'
+
+Poll Options:
+
+-   TBC
 
 ### event_id 3 = Sea Kayaking
 
@@ -118,6 +132,15 @@ Comments:
 
 -   Event 3, Luke (5), 'Hey, I am lost where is everyone?', '2022-12-01'), -
 -   Event 3, Mary Murphy/ Magic Mary (7), 'We are down at the docks unloading the kayaks', '2022-12-01'),
+
+Polls:
+
+-   Event 3, Luke (5), 'Book table Y/N?', 'Hey team would you like me to book a table for some drinks afterwards?', 'Cheeky drink', FALSE, 'OPEN'
+
+Poll Options:
+
+-   Yes
+-   No
 
 ---
 
@@ -141,3 +164,11 @@ Comments:
 -   Event 4, Dave / Uncle Dave (4), 'Will be great to catch up with all the fam next week!', '2022-11-30'),
 -   Event 4, Belinda (1), 'Me too! Will be lovely to see mum again', '2022-11-30'),
 -   Event 4, Brother Mike (8), 'Who is bringing the cake?', '2022-11-30')
+
+Polls:
+
+-   Event 4, Dave 4, 'Lets pick a location', 'Where would people like best of these options?', 'Location', FALSE, 'OPEN'
+
+Poll Options:
+
+-   TBC

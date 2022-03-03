@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="tb7MJ2tAvSLYBGZaX5OA" name="Page-1">
-        <mxGraphModel dx="977" dy="637" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="906" dy="248" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -41,7 +41,7 @@
                     <mxGeometry x="203" y="18.16000000000001" width="100" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="19" value="&lt;u&gt;NEXT UP:&lt;/u&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=top;points=[];fillColor=none;strokeColor=none;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="208" y="325.62" width="70" height="20" as="geometry"/>
+                    <mxGeometry x="208.57" y="370.62" width="70" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;GET&amp;nbsp; /appusers&lt;/font&gt;&lt;span style=&quot;font-family: &amp;#34;lucida console&amp;#34;&quot;&gt;- TESTONLY&lt;/span&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
                     <mxGeometry x="203" y="41.14" width="160" height="20" as="geometry"/>
@@ -65,10 +65,10 @@
                     <mxGeometry x="204.15" y="174.14" width="150" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="28" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;GET&amp;nbsp; /events/1/polls&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
-                    <mxGeometry x="208" y="783" width="140" height="20" as="geometry"/>
+                    <mxGeometry x="208" y="778.14" width="140" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="29" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;GET&amp;nbsp; /appusers/1/contacts&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
-                    <mxGeometry x="208" y="473.14" width="170" height="20" as="geometry"/>
+                    <mxGeometry x="204.73" y="476.14" width="170" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="30" value="&lt;u style=&quot;font-size: 10px&quot;&gt;(b) ON CLICK CONFIRM&amp;nbsp;&lt;br&gt;&lt;/u&gt;&lt;br style=&quot;font-size: 10px&quot;&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;GIVING IN&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;the new Event Object&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;br style=&quot;font-size: 10px&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;POST New Event&amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;for the loggedInUserId&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;and get back the&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;new eventId&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;br style=&quot;font-size: 10px&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;For event invitees:&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;if they are already contacts&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;(ie they have an app_user_id), then&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;insert into event_invitees table&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;if they are NOT already contacts, then&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;insert into app_users table (just email)&lt;/div&gt;&lt;div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;insert into contacts table&lt;/div&gt;&lt;div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;insert into event_invitees table&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=top;points=[];fillColor=none;strokeColor=none;rounded=0;fontSize=10;" parent="1" vertex="1">
                     <mxGeometry x="775.15" y="703" width="200" height="250" as="geometry"/>
@@ -77,10 +77,10 @@
                     <mxGeometry x="790.15" y="618.14" width="90" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;GET&amp;nbsp; /appusers/1/events&lt;br&gt;(get all user's events, &lt;br&gt;both organised+invitee&lt;br&gt;- using seed data)&lt;br&gt;&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
-                    <mxGeometry x="206.85" y="343.14" width="150" height="60" as="geometry"/>
+                    <mxGeometry x="209.15" y="310.62" width="150" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="34" value="&lt;u&gt;LATER:&lt;/u&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=top;points=[];fillColor=none;strokeColor=none;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="208" y="454.14" width="60" height="20" as="geometry"/>
+                    <mxGeometry x="208" y="536.14" width="60" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="38" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;GET /appusers/search?&lt;br&gt;email=user@user.com&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
                     <mxGeometry x="203.57999999999998" y="254.14" width="140" height="30" as="geometry"/>
@@ -97,8 +97,8 @@
                 <mxCell id="43" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;POST /comments&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
                     <mxGeometry x="203" y="201.14" width="100" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="44" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;POST /contacts&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
-                    <mxGeometry x="208.57" y="542.14" width="100" height="20" as="geometry"/>
+                <mxCell id="44" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;POST /contacts&lt;br&gt;(add new contact to &lt;br&gt;logged in user's contact list&lt;br&gt;&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="207" y="618.14" width="190" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="45" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;FIXED POST new Event &lt;br&gt;not returning&lt;br&gt;&amp;nbsp;new event_id&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
                     <mxGeometry x="16.150000000000006" y="51.81999999999995" width="140" height="40" as="geometry"/>
@@ -107,10 +107,10 @@
                     <mxGeometry x="208" y="803" width="80" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="48" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;GET&amp;nbsp; /events/1/eventinvitees&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
-                    <mxGeometry x="208" y="498.14" width="180" height="20" as="geometry"/>
+                    <mxGeometry x="208" y="516.14" width="180" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="50" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;POST /&lt;/font&gt;&lt;span style=&quot;font-family: &amp;#34;lucida console&amp;#34;&quot;&gt;eventinvitees&lt;/span&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
-                    <mxGeometry x="208.57" y="519.14" width="130" height="20" as="geometry"/>
+                <mxCell id="50" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;POST /&lt;/font&gt;&lt;span style=&quot;font-family: &amp;#34;lucida console&amp;#34;&quot;&gt;eventinvitees&lt;br&gt;(add a new invitee to&amp;nbsp;&lt;br&gt;an event)&lt;br&gt;&lt;/span&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="208" y="572.14" width="150" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="51" value="&lt;u style=&quot;font-size: 10px&quot;&gt;(a) ON MOUNT&lt;br style=&quot;font-size: 10px&quot;&gt;&lt;/u&gt;&lt;span style=&quot;font-size: 10px&quot;&gt;GIVING IN&amp;nbsp;&lt;/span&gt;&lt;span&gt;Event ID&lt;/span&gt;&lt;span style=&quot;font-size: 10px&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;FETCH event attributes&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;span&gt;FETCH polls&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;span&gt;FETCH poll options&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;span&gt;FETCH (poll) votes&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;FETCH comments&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=top;points=[];fillColor=none;strokeColor=none;rounded=0;fontSize=10;" parent="1" vertex="1">
                     <mxGeometry x="985" y="515.14" width="120" height="90" as="geometry"/>
@@ -125,7 +125,7 @@
                     <mxGeometry x="985" y="456.14" width="140" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="55" value="&lt;u&gt;LATER STILL:&lt;/u&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=top;points=[];fillColor=none;strokeColor=none;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="205.13" y="678.1400000000001" width="90" height="20" as="geometry"/>
+                    <mxGeometry x="204.73000000000002" y="698.1400000000001" width="90" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="56" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;GET&amp;nbsp; /events/1/comments&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
                     <mxGeometry x="985" y="436.14" width="150" height="20" as="geometry"/>
@@ -197,7 +197,7 @@
                     <mxGeometry x="1534.94" y="345.62" width="100" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="81" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;&lt;b&gt;PATCH &lt;/b&gt;/&lt;/font&gt;&lt;span style=&quot;font-family: &amp;#34;lucida console&amp;#34;&quot;&gt;eventinvitees&lt;br&gt;(update RSVP Status)&lt;br&gt;&lt;/span&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
-                    <mxGeometry x="207.99999999999991" y="741.1400000000001" width="140" height="30" as="geometry"/>
+                    <mxGeometry x="204.72999999999993" y="738.1400000000001" width="140" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="82" value="" style="whiteSpace=wrap;html=1;fontSize=10;fillColor=#CCFFFF;" parent="1" vertex="1">
                     <mxGeometry x="374.15" y="1.14" width="10" height="1090" as="geometry"/>
@@ -259,9 +259,6 @@
                 <mxCell id="106" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;POST/&lt;/font&gt;&lt;span style=&quot;font-family: &amp;#34;lucida console&amp;#34;&quot;&gt;eventinvitees&lt;br&gt;(insert RSVP Status)&lt;br&gt;&lt;/span&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
                     <mxGeometry x="1363" y="297.82" width="140" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="107" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;POST/&lt;/font&gt;&lt;span style=&quot;font-family: &amp;#34;lucida console&amp;#34;&quot;&gt;eventinvitees&lt;br&gt;(insert RSVP Status)&lt;br&gt;&lt;/span&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
-                    <mxGeometry x="207.99999999999997" y="701.1400000000001" width="140" height="30" as="geometry"/>
-                </mxCell>
                 <mxCell id="108" value="&lt;font face=&quot;Lucida Console&quot;&gt;POST /events/ - refactor&lt;br&gt;&amp;nbsp;to also save organiser&lt;br&gt;&amp;nbsp;-&amp;gt; EventInvitees table&amp;nbsp;&lt;br&gt;&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" parent="1" vertex="1">
                     <mxGeometry x="208.57" y="409.14" width="160" height="40" as="geometry"/>
                 </mxCell>
@@ -269,7 +266,7 @@
                     <mxGeometry x="5.0000000000000036" y="613.1399999999999" width="180" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="110" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;DELETE /&lt;/font&gt;&lt;span style=&quot;font-family: &amp;#34;lucida console&amp;#34;&quot;&gt;eventinvitees&lt;/span&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" vertex="1" parent="1">
-                    <mxGeometry x="209.15" y="575" width="140" height="20" as="geometry"/>
+                    <mxGeometry x="207.42" y="668.14" width="140" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="111" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;for each invitee:&lt;br&gt;&lt;br&gt;POST /&lt;/font&gt;&lt;span style=&quot;font-family: &amp;#34;lucida console&amp;#34;&quot;&gt;eventinvitees&lt;br&gt;(incl. the logged-in-user&lt;br&gt;&lt;/span&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" vertex="1" parent="1">
                     <mxGeometry x="790.15" y="643" width="170" height="60" as="geometry"/>
@@ -285,6 +282,12 @@
                 </mxCell>
                 <mxCell id="115" value="&lt;font face=&quot;Lucida Console&quot;&gt;ALERT: might need more &lt;br&gt;depending on how the &lt;br&gt;&quot;+&quot; button works&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=#99FFFF;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" vertex="1" parent="1">
                     <mxGeometry x="988.15" y="763" width="150" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="117" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;GET/contacts- TESTONLY&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="204.73" y="456.14" width="150" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="119" value="&lt;font face=&quot;Lucida Console&quot; style=&quot;font-size: 10px&quot;&gt;GET/eventinvitees - TESTONLY&lt;/font&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;labelBackgroundColor=#EDEDED;fontColor=#1A1A1A;fontSize=10;" vertex="1" parent="1">
+                    <mxGeometry x="207" y="496.14" width="180" height="20" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
