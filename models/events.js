@@ -45,7 +45,7 @@ export async function getAllEvents() {
 //       e.g.
 //       /appusers/:2/events/, where 2 is an app_user_id
 //********************************************************
-export async function getAllEventsForOneUser(requestedUserId) {
+export async function getAllEventsByAppUserId(requestedUserId) {
     // 02Mar2022 - REFACTORING to get all events where appUserId = organiser OR an invitee.
     // can just select off invitee list BECAUSE we've edited the 'post event' to ALSO insert the logged in user into the invitee table.
     // OLD join:

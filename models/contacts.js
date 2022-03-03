@@ -6,7 +6,40 @@ import { debugOut, infoOut } from "../utils/logging.js";
 //             (test purposes only)
 // *****************************************************
 export async function getAllContacts() {
-    return;
+    const sqlString = `SELECT
+        c.contact_id as "contactId",
+        c.contact_user_id as "contactUserId",
+        c.contact_name as "contactName",
+        to_char(c.contact_create_date_time,'DD-MM-YYYY HH:MM:SS') as "contactCreateDateTime",
+        a.app_user_email as "contactEmail",
+        a.app_user_has_account as "contactHasAccount",
+        a.app_user_first_name as "contactUserFirstName",
+        a.app_user_last_name as "contactUserLastName",
+        concat(a.app_user_first_name, ' ', a.app_user_last_name) as "contactUserName",
+        a.app_user_profile_pic_link as "contactUserProfilePicLink",
+        c.contact_owner_user_id as "contactOwnerUserId",
+        o.app_user_first_name as "contactOwnerUserFirstName",
+        o.app_user_last_name as "contactOwnerUserLastName",
+        concat(o.app_user_first_name, ' ', o.app_user_last_name) as "contactOwnerUserName"
+
+    FROM contact c
+    INNER JOIN app_user a ON c.contact_user_id = a.app_user_id
+    INNER JOIN app_user o ON c.contact_owner_user_id = o.app_user_id
+    ORDER BY c.contact_owner_user_id, c.contact_user_id;`;
+
+    debugOut(
+        `/models/contacts.js - getAllEventInvitees`,
+        `sqlString = ${sqlString}`
+    );
+
+    const data = await query(sqlString);
+    debugOut(
+        `/models/contacts.js - getAllEventInvitees`,
+        `data.rows = ${data.rows}`
+    );
+    debugOut(`/models/contacts.js - getAllEventInvitees`, data.rows, true);
+
+    return data.rows;
 }
 
 // *********************************************************
@@ -15,8 +48,47 @@ export async function getAllContacts() {
 //       /appusers/:2/contacts/, where 2 is an app_user_id
 //********************************************************
 // FYI - called from appUser routes, not contact routes
-export async function getAllContactsForOneUser() {
-    return;
+export async function getAllContactsByOwnerUserId(contactListOwnerUserId) {
+    const sqlString = `SELECT
+            c.contact_id as "contactId",
+            c.contact_user_id as "contactUserId",
+            c.contact_name as "contactName",
+            to_char(c.contact_create_date_time,'DD-MM-YYYY HH:MM:SS') as "contactCreateDateTime",
+            a.app_user_email as "contactEmail",
+            a.app_user_has_account as "contactHasAccount",
+            a.app_user_first_name as "contactUserFirstName",
+            a.app_user_last_name as "contactUserLastName",
+            concat(a.app_user_first_name, ' ', a.app_user_last_name) as "contactUserName",
+            a.app_user_profile_pic_link as "contactUserProfilePicLink",
+            c.contact_owner_user_id as "contactOwnerUserId",
+            o.app_user_first_name as "contactOwnerUserFirstName",
+            o.app_user_last_name as "contactOwnerUserLastName",
+            concat(o.app_user_first_name, ' ', o.app_user_last_name) as "contactOwnerUserName"
+
+        FROM contact c
+        INNER JOIN app_user a ON c.contact_user_id = a.app_user_id
+        INNER JOIN app_user o ON c.contact_owner_user_id = o.app_user_id
+        where o.app_user_id = $1
+        ORDER BY c.contact_owner_user_id, c.contact_user_id;`;
+
+    const sqlStringParams = [contactListOwnerUserId];
+    debugOut(
+        `/models/contacts.js - getAllContactsByOwnerUserId`,
+        `sqlString = ${sqlString}`
+    );
+
+    const data = await query(sqlString, sqlStringParams);
+    debugOut(
+        `/models/contacts.js - getAllContactsByOwnerUserId`,
+        `data.rows = ${data.rows}`
+    );
+    debugOut(
+        `/models/contacts.js - getAllContactsByOwnerUserId`,
+        data.rows,
+        true
+    );
+
+    return data.rows;
 }
 
 //*****************************************************************

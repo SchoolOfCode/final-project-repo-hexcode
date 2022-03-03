@@ -18,7 +18,7 @@ export async function getAllEventInvitees() {
             a.app_user_has_account as "inviteeHasAccount",
             a.app_user_first_name as "inviteeFirstName",
             a.app_user_last_name as "inviteeLastName",
-            concat(a.app_user_first_name, a.app_user_last_name) as "inviteeName",
+            concat(a.app_user_first_name, ' ', a.app_user_last_name) as "inviteeName",
             a.app_user_profile_pic_link as "inviteeProfilePicLink"
 
         FROM event_invitee i
@@ -59,7 +59,7 @@ export async function getAllEventInviteesByEvent(eventId) {
         a.app_user_has_account as "inviteeHasAccount",
         a.app_user_first_name as "inviteeFirstName",
         a.app_user_last_name as "inviteeLastName",
-        concat(a.app_user_first_name, a.app_user_last_name) as "inviteeName",
+        concat(a.app_user_first_name, ' ', a.app_user_last_name) as "inviteeName",
         a.app_user_profile_pic_link as "inviteeProfilePicLink",
         e.event_title as "eventTitle",
         e.event_description as "eventDescription",
