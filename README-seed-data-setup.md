@@ -72,10 +72,13 @@ Organised by: Belinda(1)
 -   Invited: Uncle Dave (4) (by Belinda (1))
 -   Invited: Magic Mary (7) (by Belinda (1))
 
-Comments:
-
--   Event 1, Magic Mary 7, 'I cannot find parking - where are you all?', '2022-12-01'),
--   Event 1, Akiko 3, 'We parked on Coders Lane', '2022-12-01'),
+Comments: \
+ event id | author user id | comment text \
+ (1, 7, 'I cannot find parking - where are you all?'), \
+ (1, 3, 'We parked on Coders Lane'), \
+ (1, 7, 'My sat-nav is broken - is that near Main Street?'), \
+ (1, 3, 'Yes - it's the second right after Shadwell'), \
+ (1, 3, 'If you hurry there's still one space left'),
 
 Polls:
 
@@ -101,10 +104,14 @@ Organised by: Belinda(1)
 -   Invited: Magic Mary (7) (by Belinda (1))
 -   Invited: BFF Katie (9) (by Akiko (3))
 
-Comments:
+Comments: \
+ event id | author user id | comment text \
 
--   Event 2, Magic Mary (7), 'I am super excited to see everyone next week!', '2022-11-30'),
--   Event 2, Belinda (1), 'Me too! What are you planning on wearing?', '2022-11-29'),
+        (2, 7, 'I am super excited to see everyone next week!'), \
+        (2, 1, 'Me too! What are you planning on wearing?'), \
+        (2, 3, 'Nothing special'), \
+        (2, 9, 'I was going all out! sparkles everyhere!'), \
+        (2, 1, 'Great! clear as mud, so'),
 
 Polls:
 
@@ -128,10 +135,14 @@ Organised by: Belinda(1)
 -   Invited: Luke (5) (by Belinda(1))
 -   Invited: Mary Murphy/ Magic Mary (7) (by Luke (5))
 
-Comments:
+Comments: \
+ event id | author user id | comment text \
 
--   Event 3, Luke (5), 'Hey, I am lost where is everyone?', '2022-12-01'), -
--   Event 3, Mary Murphy/ Magic Mary (7), 'We are down at the docks unloading the kayaks', '2022-12-01'),
+        (3, 5, 'Hey, I am lost where is everyone?'), \
+        (3, 7, 'We are down at the docks unloading the kayaks'), \
+        (3, 5, 'Great - be there in five'), \
+        (3, 5, 'Sorry - another thought - have people brought supplies?'), \
+        (3, 1, 'I've brought sandwiches anda hot drink'),
 
 Polls:
 
@@ -159,13 +170,15 @@ Organised by: Dave / Uncle Dave (4)
 -   Invited: Brother Mike (8) (by Dave (4))
 -   Invited: Katie (9) (by Dave (4))
 
-Comments:
+Comments: \
+ event id | author user id | comment text \
 
--   Event 4, Dave / Uncle Dave (4), 'Will be great to catch up with all the fam next week!', '2022-11-30'),
--   Event 4, Belinda (1), 'Me too! Will be lovely to see mum again', '2022-11-30'),
--   Event 4, Brother Mike (8), 'Who is bringing the cake?', '2022-11-30')
-
-Polls:
+        (4, 4, 'Will be great to catch up with all the fam next week!'), \
+        (4, 1, 'Me too! Will be lovely to see mum again'), \
+        (4, 8, 'Who is bringing the cake?'), \
+        (4, 1, 'I've got one ordered from Party Cakes'), \
+        (4, 1, 'Mums favorite chocolate cake!')
+        Polls:
 
 -   Event 4, Dave 4, 'Lets pick a location', 'Where would people like best of these options?', 'Location', FALSE, 'OPEN'
 
