@@ -18,8 +18,8 @@ const sqlString = `INSERT INTO comment
         (1, 7, 'I cannot find parking - where are you all?'),
         (1, 3, 'We parked on Coders Lane'),
         (1, 7, 'My sat-nav is broken - is that near Main Street?'),
-        (1, 3, 'Yes - it's the second right after Shadwell'),
-        (1, 3, 'If you hurry there's still one space left'),
+        (1, 3, 'Yes - its the second right after Shadwell'),
+        (1, 3, 'If you hurry there is still one space left'),
         (2, 7, 'I am super excited to see everyone next week!'),
         (2, 1, 'Me too! What are you planning on wearing?'),
         (2, 3, 'Nothing special'),
@@ -29,13 +29,12 @@ const sqlString = `INSERT INTO comment
         (3, 7, 'We are down at the docks unloading the kayaks'),
         (3, 5, 'Great - be there in five'),
         (3, 5, 'Sorry - another thought - have people brought supplies?'),
-        (3, 1, 'I've brought sandwiches anda hot drink'),
+        (3, 1, 'I have brought sandwiches and a hot drink'),
         (4, 4, 'Will be great to catch up with all the fam next week!'),
         (4, 1, 'Me too! Will be lovely to see mum again'),
         (4, 8, 'Who is bringing the cake?'),
-        (4, 1, 'I've got one ordered from Party Cakes'),
-        (4, 1, 'Mums favorite chocolate cake!')
-        ;`;
+        (4, 1, 'I have got one ordered from Party Cakes'),
+        (4, 1, 'Mums favorite chocolate cake!');`;
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
