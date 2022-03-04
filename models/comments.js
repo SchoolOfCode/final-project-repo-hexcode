@@ -10,7 +10,7 @@ export async function getAllComments() {
             c.comment_id as "commentId", 
             c.comment_text as "commentText",
             to_char(c.comment_date_posted,'DD-MM-YYYY') as "commentDatePosted",
-            to_char(c.comment_date_posted,'DD-MM-YYYY HH:MM:SS') as "commentDateTimePosted",
+            to_char(c.comment_create_date_time,'DD-MM-YYYY HH:MM:SS') as "commentDateTimePosted",
             AGE(c.comment_create_date_time) as "commentAge",
             c.comment_create_date_time as "commentCreateDateTime",
             c.author_user_id as "authorUserId",
@@ -56,12 +56,12 @@ export async function getAllComments() {
 //       e.g.
 //       /events/:12/comments/  where 12 is an event_id
 // ************************************************
-export async function getAllCommentsForOneEvent(eventId) {
+export async function getAllCommentsByEvent(eventId) {
     const sqlString = `SELECT
             c.comment_id as "commentId", 
             c.comment_text as "commentText",
             to_char(c.comment_date_posted,'DD-MM-YYYY') as "commentDatePosted",
-            to_char(c.comment_date_posted,'DD-MM-YYYY HH:MM:SS') as "commentDateTimePosted",
+            to_char(c.comment_create_date_time,'DD-MM-YYYY HH:MM:SS') as "commentDateTimePosted",
             AGE(c.comment_create_date_time) as "commentAge",
             c.comment_create_date_time as "commentCreateDateTime",
             c.author_user_id as "authorUserId",
@@ -89,20 +89,16 @@ export async function getAllCommentsForOneEvent(eventId) {
 
     const sqlStringParams = [eventId];
     debugOut(
-        `/models/comments.js - getAllCommentsForOneEvent`,
+        `/models/comments.js - getAllCommentsByEvent`,
         `sqlString = ${sqlString}`
     );
 
     const data = await query(sqlString, sqlStringParams);
     debugOut(
-        `/models/comments.js - getAllCommentsForOneEvent`,
+        `/models/comments.js - getAllCommentsByEvent`,
         `data.rows = ${data.rows}`
     );
-    debugOut(
-        `/models/comments.js - getAllCommentsForOneEvent`,
-        data.rows,
-        true
-    );
+    debugOut(`/models/comments.js - getAllCommentsByEvent`, data.rows, true);
 
     return data.rows;
 }
@@ -116,8 +112,7 @@ export async function postComment(newComment) {
     debugOut(`/models/comments.js - postComment`, newComment, true);
 
     // TODO: test if it works if some of the incoming attributes are MISSING.
-    const sqlString = `INSERT INTO comment
-        (
+    const sqlString = `INSERT INTO comment(
             event_id,
             author_user_id,
             comment_text

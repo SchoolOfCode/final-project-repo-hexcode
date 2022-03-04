@@ -8,6 +8,8 @@ import testRecordRoutes from "./routes/testRecords.js";
 import eventRoutes from "./routes/events.js";
 import appUserRoutes from "./routes/appUsers.js";
 import commentRoutes from "./routes/comments.js";
+import eventInviteeRoutes from "./routes/eventInvitees.js";
+import contactRoutes from "./routes/contacts.js";
 
 //FYI we could call each import (testRecordRoutes etc) anything suitable - it's an alias for router defined inside routes/testRecords.js
 //END TODO:
@@ -39,7 +41,8 @@ app.use("/testrecords", testRecordRoutes);
 app.use("/events", eventRoutes);
 app.use("/appusers", appUserRoutes);
 app.use("/comments", commentRoutes);
-
+app.use("/eventinvitees", eventInviteeRoutes);
+app.use("/contacts", contactRoutes);
 //END TODO:
 
 debugOut(`/app.js`, `script end.`);

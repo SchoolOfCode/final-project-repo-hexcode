@@ -34,6 +34,7 @@ const sqlString = `INSERT INTO event_invitee
         (4, 4, 1, 'GOING', NULL),
         (4, 4, 8, 'GOING', NULL),
         (4, 4, 9, 'TBC', NULL);`;
+//TODO: for the invitees that are 'GOING' update their 'rsvp logged date time to a non-null value, e.g. 2022-03-03 13:23:38.385512+00, - NEED TO CHECK WHAT FORMATWILL BE ACCEPTED BY DATABASE
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);

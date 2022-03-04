@@ -22,10 +22,26 @@ const sqlString = `INSERT INTO app_user
         ('akiko@akiko.com', TRUE, 'Akiko','Jones', '3.png'),
         ('dave@dave.com', TRUE, 'Dave','Milton', '4.png'),
         ('luke@luke.com', TRUE, 'Luke','Stansell', '5.png'),
-        ('tom@tom.com', FALSE, NULL, NULL, NULL),
-        ('mary@mary.com', FALSE, NULL, NULL, NULL),
-        ('mike@mike.com', FALSE, NULL, NULL, NULL),
-        ('katie@katie.com', FALSE, NULL, NULL, NULL);`;
+        ('tom@tom.com', FALSE, 'Tom', 'Phelps', '6.png'),
+        ('mary@mary.com', FALSE,  'Mary','Murphy', '7.png'),
+        ('mike@mike.com', FALSE,  'Mike','Duffy','8.png'),
+        ('katie@katie.com', FALSE,  'Katie','Smith', '9.png');`;
+
+// TODO: the correct data is below (commented out) . Contacts that have not set up an app login should NOT
+//       have a name or profile pic in the app user table.
+//       The name should be taken from the contacts table.
+//       However, as a temporary measure, I'm adding in names etc, to make the SQL for the models easier/faster
+//       Will select names from app_user rather than going via contacts table
+//      This means
+// ('belinda@belinda.com', TRUE, 'Belinda','Duffy', '1.png'),
+// ('maria@maria.com', TRUE, 'Maria','Rushmore', '2.png'),
+// ('akiko@akiko.com', TRUE, 'Akiko','Jones', '3.png'),
+// ('dave@dave.com', TRUE, 'Dave','Milton', '4.png'),
+// ('luke@luke.com', TRUE, 'Luke','Stansell', '5.png'),
+// ('tom@tom.com', FALSE, NULL, NULL, NULL),
+// ('mary@mary.com', FALSE, NULL, NULL, NULL),
+// ('mike@mike.com', FALSE, NULL, NULL, NULL),
+// ('katie@katie.com', FALSE, NULL, NULL, NULL);`;
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);

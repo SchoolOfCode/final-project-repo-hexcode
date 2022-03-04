@@ -23,8 +23,8 @@ const sqlString = `INSERT INTO poll
     VALUES
         (1, 1, 'Available Dates?', 'Hey guys which dates are you available?', 'Birthday party', FALSE, 'OPEN'),
         (2, 1, 'Favourite Day?', 'Girls please pick your fav day!', 'SPA & champagne', FALSE, 'OPEN'),
-        (3, 2, 'Book table Y/N?', 'Hey team would you like me to book a table for some drinks afterwards?', 'Cheeky drink', FALSE, 'OPEN'),
-        (4, 4, 'Available Dates?', 'Which date is everyone available?', 'Mums Birthday', TRUE, 'OPEN');`;
+        (3, 5, 'Book table Y/N?', 'Hey team would you like me to book a table for some drinks afterwards?', 'Cheeky drink', FALSE, 'OPEN'),
+        (4, 4, 'Lets pick a location', 'Where would people like best of these options?', 'Location', FALSE, 'OPEN');`;
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
