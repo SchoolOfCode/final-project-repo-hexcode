@@ -46,7 +46,7 @@ commentRoutes.post("*", async function (req, res) {
         message: `Inserted new comment record`,
         //TODO: decide what we are returning - just comment id, or the whole body?
         // commentId: postResults.rows[0].comment_id,
-        eventId: postResults,
+        commentId: postResults,
         payload: postResults, //currently postResults is just comment id
     });
 });
