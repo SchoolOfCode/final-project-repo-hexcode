@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="6lSgenySCgPRsshGHU0C" name="Data Model V2">
-        <mxGraphModel dx="1657" dy="2014" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="2896" dy="2489" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="jG_bEh5ZBlwl_KSDs3WX-0"/>
                 <mxCell id="jG_bEh5ZBlwl_KSDs3WX-1" parent="jG_bEh5ZBlwl_KSDs3WX-0"/>
@@ -974,7 +974,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="YCCkVGw_ebPRzPs4m6oD-225" value="POLL_VOTE" style="shape=table;startSize=20;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;fontColor=#000000;fillColor=#f0a30a;strokeColor=#FFFFFF;" parent="jG_bEh5ZBlwl_KSDs3WX-1" vertex="1">
-                    <mxGeometry x="2879" y="1620" width="309" height="220" as="geometry">
+                    <mxGeometry x="2520" y="1650" width="309" height="220" as="geometry">
                         <mxRectangle x="1720" y="1660" width="60" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
@@ -1077,7 +1077,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="YCCkVGw_ebPRzPs4m6oD-244" value="TECH NOTES:&lt;br&gt;to front end, we'd need to return count votes per option,&lt;br&gt;and total votes, and therefore percentage votes per option&lt;br&gt;= &amp;gt; just return the percentage votes per option?&lt;br&gt;&lt;br&gt;To say iif people have voted at least once - would have to do a left-join invitee-table &amp;lt;&amp;gt; pollvotes table&amp;nbsp; to say '5 people still to vote'&lt;br&gt;" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=9;verticalAlign=top;align=left;rounded=1;fontSize=13;fontColor=#000000;fontStyle=2;fillColor=#F0A30A;" parent="jG_bEh5ZBlwl_KSDs3WX-1" vertex="1">
-                    <mxGeometry x="2879" y="2070" width="360" height="150" as="geometry"/>
+                    <mxGeometry x="2520" y="2100" width="360" height="150" as="geometry"/>
                 </mxCell>
                 <mxCell id="YCCkVGw_ebPRzPs4m6oD-245" style="edgeStyle=none;html=1;" parent="jG_bEh5ZBlwl_KSDs3WX-1" source="YCCkVGw_ebPRzPs4m6oD-246" target="YCCkVGw_ebPRzPs4m6oD-11" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -1148,7 +1148,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="YCCkVGw_ebPRzPs4m6oD-270" value="TECH NOTES - USER JOURNEY&amp;nbsp;&lt;br&gt;POST POLL_VOTE - would need to be careful - someone should be allowed to change their vote (NOT MVP), in which case the front end should do a PATCH not a POST.&lt;br&gt;&lt;br&gt;Also, have included poll_vote_date_time in case some organisers want to see who voted when - in case something is a first come, first served.&amp;nbsp; Ditto on invitation acceptance.&lt;br&gt;Also,&lt;br&gt;POLL_VOTE_CREATE_DATE_TIME is set when the vote is first made and inserted; but poll_vote_date _time is updated every time the vote changes (ii.e. for every PATCH)" style="shape=note2;boundedLbl=1;whiteSpace=wrap;html=1;size=9;verticalAlign=top;align=left;rounded=1;fontSize=13;fontColor=#000000;fontStyle=2;fillColor=#F0A30A;" parent="jG_bEh5ZBlwl_KSDs3WX-1" vertex="1">
-                    <mxGeometry x="2879" y="1855" width="360" height="205" as="geometry"/>
+                    <mxGeometry x="2520" y="1885" width="360" height="205" as="geometry"/>
                 </mxCell>
                 <mxCell id="YCCkVGw_ebPRzPs4m6oD-271" style="edgeStyle=none;html=1;fontColor=#FFFFFF;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="jG_bEh5ZBlwl_KSDs3WX-1" source="YCCkVGw_ebPRzPs4m6oD-272" target="YCCkVGw_ebPRzPs4m6oD-52" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -1472,7 +1472,7 @@
                 <mxCell id="0oWfzOjK2_32Pi-fEblG-67" value="Logical Data Model" style="text;html=1;strokeColor=none;fillColor=#003300;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="jG_bEh5ZBlwl_KSDs3WX-1" vertex="1">
                     <mxGeometry y="10" width="1610" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="0oWfzOjK2_32Pi-fEblG-68" value="Domain Model (there's lots of methods of doing this)" style="text;html=1;strokeColor=none;fillColor=#003300;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="jG_bEh5ZBlwl_KSDs3WX-1" vertex="1">
+                <mxCell id="0oWfzOjK2_32Pi-fEblG-68" value="Domain Model" style="text;html=1;strokeColor=none;fillColor=#003300;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;" parent="jG_bEh5ZBlwl_KSDs3WX-1" vertex="1">
                     <mxGeometry x="22" y="-1160" width="1610" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="0oWfzOjK2_32Pi-fEblG-69" style="edgeStyle=none;html=1;fontSize=25;endArrow=none;endFill=0;startSize=12;endSize=12;strokeWidth=2;" parent="jG_bEh5ZBlwl_KSDs3WX-1" source="0oWfzOjK2_32Pi-fEblG-71" target="0oWfzOjK2_32Pi-fEblG-8" edge="1">
