@@ -1,14 +1,15 @@
 import express from "express";
 import { debugOut, infoOut } from "../utils/logging.js";
 import { getAllEvents, getEventById, postEvent } from "../models/events.js";
-import { getAllCommentsForOneEvent } from "../models/comments.js";
-
-const eventRoutes = express.Router();
+import { getAllCommentsByEvent } from "../models/comments.js";
+import { getAllEventInviteesByEvent } from "../models/eventInvitees.js";
 
 debugOut(`routes/events.js`, `script start`);
+const eventRoutes = express.Router();
 
 // ***************************************************************
-//       GET ALL EVENTS (regardless of user - test purposes only)
+//       GET ALL EVENTS (regardless of user(
+//              (test purposes only)
 // ***************************************************************
 eventRoutes.get("/", async (req, res) => {
     const searchResults = await getAllEvents();
@@ -50,13 +51,31 @@ eventRoutes.get(`/:id`, async (req, res) => {
 eventRoutes.get("/:id/comments", async (req, res) => {
     const eventId = req.params.id;
 
-    const searchResults = await getAllCommentsForOneEvent(eventId);
+    const searchResults = await getAllCommentsByEvent(eventId);
 
     res.json({
         success: true,
         message: `Retrieved all comments, plus authors for event id ${eventId}`,
         payload: searchResults,
     });
+});
+
+// ************************************************
+//       GET ALL EVENT INVITEES for a given EVENT ID
+//       e.g.
+//       /events/:12/eventinvitees/  where 12 is an event_id
+// ************************************************
+eventRoutes.get(`/:id/eventinvitees`, async (req, res) => {
+    const eventId = req.params.id;
+    const searchResults = await getAllEventInviteesByEvent(eventId);
+
+    res.json({
+        success: true,
+        message: `Retrieved all event invitees for event ${eventId}`,
+        payload: searchResults,
+    });
+
+    return;
 });
 
 // ************************************************
@@ -94,5 +113,4 @@ eventRoutes.post("*", async function (req, res) {
 // ************************************************
 
 debugOut(`routes/events.js`, `script end`);
-
 export default eventRoutes;
