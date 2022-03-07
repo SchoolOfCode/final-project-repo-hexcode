@@ -32,8 +32,8 @@ export async function getAllComments() {
             e.event_create_date_time as "eventCreateDateTime"
 
         FROM comment c
-        INNER JOIN app_user a ON c.author_user_id = a.app_user_id
-        INNER JOIN event e ON c.event_id = e.event_id
+        LEFT OUTER JOIN app_user a ON c.author_user_id = a.app_user_id
+        LEFT OUTER JOIN event e ON c.event_id = e.event_id
         ORDER BY c.comment_id DESC;`;
 
     debugOut(
