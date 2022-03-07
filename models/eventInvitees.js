@@ -4,6 +4,8 @@ import { debugOut, infoOut } from "../utils/logging.js";
 // *****************************************************
 //       GET ALL EVENT INVITEES (regardless of event)
 //             (test purposes only)
+//       e.g.
+//           /eventinvitees
 // *****************************************************
 export async function getAllEventInvitees() {
     const sqlString = `SELECT
@@ -22,7 +24,7 @@ export async function getAllEventInvitees() {
             a.app_user_profile_pic_link as "inviteeProfilePicLink"
 
         FROM event_invitee i
-        INNER JOIN app_user a ON i.invitee_user_id = a.app_user_id
+        LEFT OUTER JOIN app_user a ON i.invitee_user_id = a.app_user_id
         ORDER BY i.event_id, i.event_invitee_id;`;
 
     debugOut(
@@ -102,18 +104,56 @@ export async function getAllEventInviteesByEvent(eventId) {
 //       (will need the eventInvitee's event_id and user id of
 //        the person who issued the invite)
 // *****************************************************************
+// will be called from eventInvitee route AND from events route (when adding an event, need to also add the organiser/logged-in-user as a invitee)
 export async function postEventInvitee(newEventInvitee) {
     // need eventId
     // need inviteIssuerUserId
 
-    return;
+    debugOut(
+        `/models/eventInvitees.js - postEventInvitee`,
+        newEventInvitee,
+        true
+    );
 
-    // event_invitee:
-    // event_invitee_id SERIAL PRIMARY KEY,
-    // event_id INT,
-    // invite_issuer_user_id INT,
-    // invitee_user_id INT,
-    // event_invitee_rsvp_status VARCHAR(15),
-    // event_invitee_rsvp_logged_date_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    // event_invitee_create_date_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    // TODO: test if it works if some of the incoming attributes are MISSING.
+    // event_invitee_id, event_invitee_rsvp_logged_date_time, and  event_invitee_create_date_time will auto-populate
+    const sqlString = `INSERT INTO event_invitee
+        (
+            event_id,
+            invite_issuer_user_id,
+            invitee_user_id,
+            event_invitee_rsvp_status
+        )
+        VALUES(
+            $1,
+            $2,
+            $3,
+            'TBC'
+        ) RETURNING *;`;
+
+    const sqlStringParams = [
+        newEventInvitee.eventId,
+        newEventInvitee.inviteIssuerUserId,
+        newEventInvitee.inviteeUserId,
+    ];
+
+    debugOut(
+        `/models/eventInvitees.js - postEventInvitee`,
+        `sqlString = ${sqlString}`
+    );
+
+    const result = await query(sqlString, sqlStringParams);
+
+    const newEventInviteeId = result.rows[0].event_invitee_id;
+
+    debugOut(`/models/eventInvitees.js - postEventInvitee`, result, true);
+
+    debugOut(
+        `/models/eventInvitees.js - postEventInvitee`,
+        `NEW EVENT_INVITEE_ID is: ${newEventInviteeId}`
+    );
+
+    //TODO: maybe change what's returned. Only returning new event invitee id for now
+    return newEventInviteeId;
+    //we could return result, or could specifically just return the new event object (result.rows[0]) - BUT WOULD FIRST NEED TO MAP from TABLE_NAMES TO frontEndNames
 }
