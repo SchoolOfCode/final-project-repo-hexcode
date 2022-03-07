@@ -23,8 +23,8 @@ export async function getAllContacts() {
         concat(o.app_user_first_name, ' ', o.app_user_last_name) as "contactOwnerUserName"
 
     FROM contact c
-    INNER JOIN app_user a ON c.contact_user_id = a.app_user_id
-    INNER JOIN app_user o ON c.contact_owner_user_id = o.app_user_id
+    LEFT OUTER JOIN app_user a ON c.contact_user_id = a.app_user_id
+    LEFT OUTER JOIN app_user o ON c.contact_owner_user_id = o.app_user_id
     ORDER BY c.contact_owner_user_id, c.contact_user_id;`;
 
     debugOut(

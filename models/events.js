@@ -22,7 +22,7 @@ export async function getAllEvents() {
         a.app_user_profile_pic_link as "organiserProfilePicLink",
         a.app_user_create_date_time as "organiserCreateDateTime"
     FROM event e
-    INNER JOIN app_user a ON e.organiser_user_id = a.app_user_id
+    LEFT OUTER JOIN app_user a ON e.organiser_user_id = a.app_user_id
     ORDER BY e.event_id DESC;`;
     // order descending so any event just added will be at the top
 
