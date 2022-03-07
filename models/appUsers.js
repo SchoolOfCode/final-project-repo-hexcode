@@ -5,7 +5,7 @@ import { debugOut, infoOut } from "../utils/logging.js";
 //       GET ALL APP USERS
 // ************************************************
 export async function getAllAppUsers() {
-    const sqlString = `SELECT a.app_user_id as "appUserid",
+    const sqlString = `SELECT a.app_user_id as "appUserId",
                 a.app_user_email as "appUserEmail",
                 a.app_user_has_account as "appUserHasAccount",
                 a.app_user_first_name as "appUserFirstName",
@@ -29,7 +29,7 @@ export async function getAllAppUsers() {
 //       GET  APP USER for a given APP USER EMAIL (query)
 // ***********************************************************
 export async function getAppUserFromEmail(appUserEmail) {
-    const sqlString = `SELECT a.app_user_id as "appUserid",
+    const sqlString = `SELECT a.app_user_id as "appUserId",
                         a.app_user_email as "appUserEmail",
                         a.app_user_has_account as "appUserHasAccount",
                         a.app_user_first_name as "appUserFirstName",
@@ -57,7 +57,7 @@ export async function getAppUserFromEmail(appUserEmail) {
 //     GET ONE APP USER for a given APP USER ID
 // ************************************************
 export async function getAppUserById(appUserId) {
-    const sqlString = `SELECT a.app_user_id as "appUserid",
+    const sqlString = `SELECT a.app_user_id as "appUserId",
                         a.app_user_email as "appUserEmail",
                         a.app_user_has_account as "appUserHasAccount",
                         a.app_user_first_name as "appUserFirstName",
