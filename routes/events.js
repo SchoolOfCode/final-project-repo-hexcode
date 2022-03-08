@@ -18,12 +18,12 @@ const eventRoutes = Router();
 //              (test purposes only)
 // ***************************************************************
 eventRoutes.get("/", async (req, res) => {
-    const searchResults = await getAllEvents();
+    const allEventsArray = await getAllEvents();
 
     res.json({
         success: true,
         message: `Retrieved all events regardless of user - TEST PURPOSES ONLY`,
-        payload: searchResults,
+        payload: allEventsArray,
     });
 });
 
@@ -37,18 +37,45 @@ eventRoutes.get("/", async (req, res) => {
 //       e.g.
 //       /events/:12, where 12 is an event_id
 // ************************************************
+// FYI: Express also supports named route parameters and puts them in the req.params object. Named route parameters are always strings, and Express automatically decodes them using decodeUriComponent().
 eventRoutes.get(`/:id`, async (req, res) => {
     const eventId = req.params.id;
-    const searchResults = await getEventById(eventId);
 
-    //TODO: add in try/catch code, and change success value depending on this.
+    //check that the 'id' key value pair has been sent - otherwise return without attempting the search
+    if (eventId === undefined || eventId === null) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - id parameter (for event id) not found`,
+            payload: null,
+        });
+        return;
+    }
+    if (!(typeof eventId === "number")) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - event id parameter must be integer`,
+            payload: null,
+        });
+        return;
+    }
+    // it's safe to go ahead and attempt to retrive the event object:
+    const eventObject = await getEventById(eventId);
+
+    //check eventObject returned - NOW will either be undefined (if no event was retrieved) or will be a complete event object (NO ARRAY ANY MORE)
+    if (eventObject === undefined) {
+        res.status(404).json({
+            success: false,
+            message: `hexcode - event object record not found for event id ${eventId}`,
+            payload: null,
+        });
+        return;
+    }
     res.json({
         success: true,
-        message: `Retrieved event with event id ${eventId}`,
-        payload: searchResults,
+        message: `Retrieved event object with id of ${eventId}`,
+        payload: eventObject,
     });
 });
-
 // ************************************************
 //       GET ALL COMMENTS for a given EVENT ID
 //       e.g.
@@ -57,12 +84,30 @@ eventRoutes.get(`/:id`, async (req, res) => {
 eventRoutes.get("/:id/comments", async (req, res) => {
     const eventId = req.params.id;
 
-    const searchResults = await getAllCommentsByEvent(eventId);
+    //check that the 'id' key value pair has been sent - otherwise return without attempting the search
+    if (eventId === undefined || eventId === null) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - id parameter (for event id) not found`,
+            payload: null,
+        });
+        return;
+    }
+    if (!(typeof eventId === "number")) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - event id parameter must be integer`,
+            payload: null,
+        });
+        return;
+    }
+
+    const commentsArray = await getAllCommentsByEvent(eventId);
 
     res.json({
         success: true,
         message: `Retrieved all comments, plus authors for event id ${eventId}`,
-        payload: searchResults,
+        payload: commentsArray,
     });
 });
 
@@ -73,32 +118,74 @@ eventRoutes.get("/:id/comments", async (req, res) => {
 // ************************************************
 eventRoutes.get(`/:id/eventinvitees`, async (req, res) => {
     const eventId = req.params.id;
-    const searchResults = await getAllEventInviteesByEvent(eventId);
 
+    //check that the 'id' key value pair has been sent - otherwise return without attempting the search
+    if (eventId === undefined || eventId === null) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - id parameter (for event id) not found`,
+            payload: null,
+        });
+        return;
+    }
+    if (!(typeof eventId === "number")) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - event id parameter must be integer`,
+            payload: null,
+        });
+        return;
+    }
+
+    const eventInviteesArray = await getAllEventInviteesByEvent(eventId);
     res.json({
         success: true,
         message: `Retrieved all event invitees for event ${eventId}`,
-        payload: searchResults,
+        payload: eventInviteesArray,
     });
-
-    return;
 });
 
 // ************************************************
 //       POST NEW EVENT for a given APP USER ID
 // ************************************************
 eventRoutes.post("*", async function (req, res) {
-    //TODO: put try/catch error code here
-    const organiserUserId = req.body.organiserUserId; //needed for inserting event invitee
+    // To insert a new event record, must have an Organiser User ID, which must be an integer - organiserUserId is needed for inserting organiser-as-event invitee on create of new event
+    const organiserUserId = req.body.organiserUserId;
+    if (organiserUserId === undefined) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - id parameter (organiserUserId) not found`,
+            payload: null,
+        });
+        return;
+    }
+    if (!(typeof organiserUserId === "number")) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - organiser user id  must be integer`,
+            payload: null,
+        });
+        return;
+    }
+    // must have an event title as well to insert. Rest is optional
+    const eventTitle = req.body.eventTitle;
+    if (eventTitle === undefined) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - new event title (eventTitle) not found`,
+            payload: null,
+        });
+        return;
+    }
 
     //insert a new event, just to the event table (none of the extra stuff)
     //insert the event, and reeive bact the new event object, including new event id.
-    const postResults = await postEvent(req.body); //have updated postResults to contain newEventObject
+    const newEventId = await postEvent(req.body); //have updated postResults to contain newEventObject
 
     debugOut(
         `routes/events.js/POST new Event`,
         // `NEW EVENT_ID is: ${postResults.eventId}`
-        `NEW EVENT_ID is: ${postResults}`
+        `NEW EVENT_ID is: ${newEventId}`
     );
 
     //here - i can use the new event_id (postResults.rows[0].event_id) OR JUST postResults, to then post related records (invitees, comments etc) to other tables.
@@ -110,15 +197,15 @@ eventRoutes.post("*", async function (req, res) {
     //        the person who issued the invite)
     // *****************************************************************
     let newEventInvitee = {};
-    newEventInvitee.eventId = postResults; //or, if i return whole object, postResults.rows[0].event_id;
+    newEventInvitee.eventId = newEventId; //or, if i return whole object, postResults.rows[0].event_id;
     // on create event, we post the organiser as an invitee, setting themselves as the person who invited them.
     // TODO: currently getting organiserUserId from req.body because the POST Event currently only returns newEventId.  Would Need to update the event model post to (a) mapp the database event object attributles from snake case to camel case, and then to return the full object, not just the eventId
     newEventInvitee.inviteIssuerUserId = organiserUserId;
     newEventInvitee.inviteeUserId = organiserUserId;
-    const postInviteeResults = await postEventInvitee(newEventInvitee);
+    const newEventInviteeId = await postEventInvitee(newEventInvitee);
     debugOut(
         `routes/events.js/POST new Event Invitee`,
-        `NEW EVENT_INVITE ID is: ${postInviteeResults}`
+        `NEW EVENT_INVITE ID is: ${newEventInviteeId}`
     );
 
     //TODO: add function call to post the list of invitees to the event_invitee table (and firstly, to the app_users table if necessary, and to the contacts table if necessary)
@@ -128,9 +215,8 @@ eventRoutes.post("*", async function (req, res) {
         message: `Inserted new event record + (organiser as) event invitee record`,
         //TODO: decide what we are returning - just event id, or the whole body?
         // eventId: postResults.rows[0].event_id,
-        eventId: postResults,
-        eventInviteeId: postInviteeResults,
-        payload: postResults, //currently postResults is just event id
+        eventId: newEventId,
+        eventInviteeId: newEventInviteeId,
     });
 });
 

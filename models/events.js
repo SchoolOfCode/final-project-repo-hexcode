@@ -184,9 +184,10 @@ export async function getEventById(eventId) {
     debugOut(`/models/events.js - getEventById`, `data.rows = ${data.rows}`);
     debugOut(`/models/events.js - getEventById`, data.rows, true);
 
-    // ---- NB: TODO: Now just return object not array of 1 object - more RESTful says ARshi  ----
-    return data.rows;
-    // return data.rows[0];
+    // ---- NB: Now just return object not array of 1 object - more RESTful says ARshi  ----
+    // return data.rows;
+    const eventObject = data.rows[0];
+    return eventObject;
 }
 
 // ************************************************
