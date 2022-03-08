@@ -9,6 +9,8 @@ import {
     postEventInvitee,
 } from "../models/eventInvitees.js";
 
+import { isNotNumeric } from "../utils/checktypes.js";
+
 debugOut(`routes/events.js`, `script start`);
 // const eventRoutes = express.Router();
 const eventRoutes = Router();
@@ -50,7 +52,8 @@ eventRoutes.get(`/:id`, async (req, res) => {
         });
         return;
     }
-    if (!(typeof eventId === "number")) {
+    // if (!(typeof eventId === "number")) {
+    if (isNotNumeric(eventId)) {
         res.status(400).json({
             success: false,
             message: `hexcode - event id parameter must be integer`,
@@ -93,7 +96,8 @@ eventRoutes.get("/:id/comments", async (req, res) => {
         });
         return;
     }
-    if (!(typeof eventId === "number")) {
+    // if (!(typeof eventId === "number")) {
+    if (isNotNumeric(eventId)) {
         res.status(400).json({
             success: false,
             message: `hexcode - event id parameter must be integer`,
@@ -128,7 +132,8 @@ eventRoutes.get(`/:id/eventinvitees`, async (req, res) => {
         });
         return;
     }
-    if (!(typeof eventId === "number")) {
+    // if (!(typeof eventId === "number")) {
+    if (isNotNumeric(eventId)) {
         res.status(400).json({
             success: false,
             message: `hexcode - event id parameter must be integer`,
@@ -151,20 +156,30 @@ eventRoutes.get(`/:id/eventinvitees`, async (req, res) => {
 eventRoutes.post("*", async function (req, res) {
     // To insert a new event record, must have an Organiser User ID, which must be an integer - organiserUserId is needed for inserting organiser-as-event invitee on create of new event
     const organiserUserId = req.body.organiserUserId;
+
     if (organiserUserId === undefined) {
         res.status(400).json({
             success: false,
             message: `hexcode - id parameter (organiserUserId) not found`,
             payload: null,
         });
+        debugOut(
+            `/routes/events.js - post`,
+            `organiserUserId is undefined = |${organiserUserId}|`
+        );
         return;
     }
-    if (!(typeof organiserUserId === "number")) {
+    // if (!(typeof organiserUserId === "number")) {
+    if (isNotNumeric(organiserUserId)) {
         res.status(400).json({
             success: false,
             message: `hexcode - organiser user id  must be integer`,
             payload: null,
         });
+        debugOut(
+            `/routes/events.js - post`,
+            `organiserUserId is not numeric = |${organiserUserId}|`
+        );
         return;
     }
     // must have an event title as well to insert. Rest is optional
@@ -175,6 +190,11 @@ eventRoutes.post("*", async function (req, res) {
             message: `hexcode - new event title (eventTitle) not found`,
             payload: null,
         });
+
+        debugOut(
+            `/routes/events.js - post`,
+            `eventTitle is undefined = |${eventTitle}|`
+        );
         return;
     }
 
@@ -182,11 +202,7 @@ eventRoutes.post("*", async function (req, res) {
     //insert the event, and reeive bact the new event object, including new event id.
     const newEventId = await postEvent(req.body); //have updated postResults to contain newEventObject
 
-    debugOut(
-        `routes/events.js/POST new Event`,
-        // `NEW EVENT_ID is: ${postResults.eventId}`
-        `NEW EVENT_ID is: ${newEventId}`
-    );
+    debugOut(`/routes/events.js - post`, `NEW EVENT ID is: ${newEventId}`);
 
     //here - i can use the new event_id (postResults.rows[0].event_id) OR JUST postResults, to then post related records (invitees, comments etc) to other tables.
     //DONE - add function call to post the organiser to the event_invitee table
@@ -205,7 +221,7 @@ eventRoutes.post("*", async function (req, res) {
     const newEventInviteeId = await postEventInvitee(newEventInvitee);
     debugOut(
         `routes/events.js/POST new Event Invitee`,
-        `NEW EVENT_INVITE ID is: ${newEventInviteeId}`
+        `NEW EVENT INVITEE ID (for Organiser) is: ${newEventInviteeId}`
     );
 
     //TODO: add function call to post the list of invitees to the event_invitee table (and firstly, to the app_users table if necessary, and to the contacts table if necessary)

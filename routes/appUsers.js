@@ -10,6 +10,8 @@ import {
 import { getAllEventsByAppUserId } from "../models/events.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
 import { getAllContactsByOwnerUserId } from "../models/contacts.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
 
+import { isNotNumeric } from "../utils/checktypes.js";
+
 // const appUserRoutes = express.Router();
 const appUserRoutes = Router();
 
@@ -22,6 +24,7 @@ appUserRoutes.get("/", async (req, res) => {
     // the following is use to test the error-handling.
     // comment out when not in dev!
     // throw new Error(`routes/Appusers.js: Get all  users - testing error`);
+    debugOut(`/routes/appUsers.js`, `calling getAllAppUsers`);
 
     const allAppUsersArray = await getAllAppUsers();
 
@@ -42,6 +45,8 @@ appUserRoutes.get("/", async (req, res) => {
 //
 // FYI: Express parses query string parameters by default, and puts them into the req.query property
 appUserRoutes.get(`/search`, async (req, res) => {
+    debugOut(`/routes/appUsers.js - search`, `calling getAppUserFromEmail`);
+
     const appUserEmail = req.query.email;
     //check that the 'email' key value pair has been sent - otherwise return without attempting the search
     if (appUserEmail === undefined) {
@@ -78,6 +83,8 @@ appUserRoutes.get(`/search`, async (req, res) => {
 appUserRoutes.get(`/:id`, async (req, res) => {
     const appUserId = req.params.id;
 
+    debugOut(`/routes/appUsers.js - appusers/id`, `start`);
+
     //check that the 'id' key value pair has been sent - otherwise return without attempting the search
     if (appUserId === undefined || appUserId === null) {
         res.status(400).json({
@@ -85,18 +92,27 @@ appUserRoutes.get(`/:id`, async (req, res) => {
             message: `hexcode - (app user) id parameter not found`,
             payload: null,
         });
+        debugOut(
+            `/routes/appUsers.js - appusers/id`,
+            `appUserId is undefined or null = |${appUserId}|`
+        );
         return;
     }
 
-    if (!(typeof appUserId === "number")) {
+    // if (!(typeof appUserId === "number")) {
+    if (isNotNumeric(appUserId)) {
         res.status(400).json({
             success: false,
             message: `hexcode - (app user) id parameter must be integer`,
             payload: null,
         });
+        debugOut(
+            `/routes/appUsers.js - appusers/id`,
+            `appUserId is not integer = |${appUserId}| type = |${typeof appUserId}|`
+        );
         return;
     }
-
+    debugOut(`/routes/appUsers.js - appusers/id`, `calling getAppUserById`);
     const userObject = await getAppUserById(appUserId);
 
     //check userObject - will either be undefined (if no user was retrieved) or will be a user object (NO ARRAY ANY MORE)
@@ -106,6 +122,10 @@ appUserRoutes.get(`/:id`, async (req, res) => {
             message: `hexcode - user record not found for id ${appUserId}`,
             payload: null,
         });
+        debugOut(
+            `/routes/appUsers.js - appusers/id`,
+            `returned userObject is undefined = |${userObject}|`
+        );
         return;
     }
     res.json({
@@ -113,6 +133,7 @@ appUserRoutes.get(`/:id`, async (req, res) => {
         message: `Retrieved app user object with id of ${appUserId}`,
         payload: userObject,
     });
+    debugOut(`/routes/appUsers.js - appusers/id`, `completed successfully`);
 });
 
 //********************************************************
@@ -132,7 +153,8 @@ appUserRoutes.get("/:id/events", async (req, res) => {
         return;
     }
 
-    if (!(typeof appUserId === "number")) {
+    // if (!(typeof appUserId === "number")) {
+    if (isNotNumeric(appUserId)) {
         res.status(400).json({
             success: false,
             message: `hexcode - (app user) id parameter must be integer`,
@@ -168,7 +190,8 @@ appUserRoutes.get("/:id/contacts", async (req, res) => {
         return;
     }
 
-    if (!(typeof appUserId === "number")) {
+    // if (!(typeof appUserId === "number")) {
+    if (isNotNumeric(appUserId)) {
         res.status(400).json({
             success: false,
             message: `hexcode - (app user) id parameter must be integer`,
