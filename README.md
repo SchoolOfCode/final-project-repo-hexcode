@@ -57,6 +57,18 @@ This data is detailed in the following markdown document:
 
 ---
 
+### Error Codes + error messages
+
+| Code | route                  | Messsage Examples                                |
+| ---- | ---------------------- | ------------------------------------------------ |
+| 200  | all                    | success                                          |
+| 400  | appusers/:id           | hexcode - id parameter (for user id) not found   |
+| 400  | appusers/:id           | hexcode - id parameter must be integer           |
+| 404  | appusers/:id           | hexcode - user record not found for id           |
+| 400  | appusers/search?email= | hexcode - email query string parameter not found |
+| 404  | appusers/search?email= | hexcode - user not found for this email address  |
+| 500  | all                    | hexcode - generic serverside error has occured   |
+
 ### API Routes
 
 The APIs aim to adhere to RESTful best practice.

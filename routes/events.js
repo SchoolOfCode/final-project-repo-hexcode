@@ -1,4 +1,6 @@
-import express from "express";
+// import express from "express";
+import Router from "express-promise-router";
+
 import { debugOut, infoOut } from "../utils/logging.js";
 import { getAllEvents, getEventById, postEvent } from "../models/events.js";
 import { getAllCommentsByEvent } from "../models/comments.js";
@@ -8,7 +10,8 @@ import {
 } from "../models/eventInvitees.js";
 
 debugOut(`routes/events.js`, `script start`);
-const eventRoutes = express.Router();
+// const eventRoutes = express.Router();
+const eventRoutes = Router();
 
 // ***************************************************************
 //       GET ALL EVENTS (regardless of user(

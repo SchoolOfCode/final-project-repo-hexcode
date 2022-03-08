@@ -1,8 +1,10 @@
-import express from "express";
+// import express from "express";
+import Router from "express-promise-router";
 import { debugOut, infoOut } from "../utils/logging.js";
 import { getAllComments, postComment } from "../models/comments.js";
 
-const commentRoutes = express.Router();
+//const commentRoutes = express.Router();
+const commentRoutes = Router();
 
 debugOut(`routes/comments.js`, `script start`);
 

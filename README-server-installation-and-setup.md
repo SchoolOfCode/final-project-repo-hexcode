@@ -1,5 +1,13 @@
 This readme file contains the setup steps followed from start to finish to get this server up and working with a couple of database tables, and a simple route.
 
+# UPDATES TO MAKE
+
+-   add the following steps into the setup/config instructionsbelow:
+
+```
+    npm i express-promise-router (to help trap server errors and prevent application crashing)
+```
+
 # PACKAGE INSTALLATIONS + package.json file edits
 
 -   clone the empty repo from github down into a local folder, e.g.

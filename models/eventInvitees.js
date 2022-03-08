@@ -21,10 +21,12 @@ export async function getAllEventInvitees() {
             a.app_user_first_name as "inviteeFirstName",
             a.app_user_last_name as "inviteeLastName",
             concat(a.app_user_first_name, ' ', a.app_user_last_name) as "inviteeName",
-            a.app_user_profile_pic_link as "inviteeProfilePicLink"
+            a.app_user_profile_pic_link as "inviteeProfilePicLink",
+            e.event_title as "eventTitle"
 
         FROM event_invitee i
         LEFT OUTER JOIN app_user a ON i.invitee_user_id = a.app_user_id
+        LEFT OUTER JOIN event e ON i.event_id = e.event_id
         ORDER BY i.event_id, i.event_invitee_id;`;
 
     debugOut(
