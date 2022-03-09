@@ -1,9 +1,13 @@
-import express from "express";
+// import express from "express";
+import Router from "express-promise-router";
+
 import { debugOut, infoOut } from "../utils/logging.js";
 
 import { getAllTestRecords, postTestRecord } from "../models/testRecords.js";
 
-const testRecordRoutes = express.Router();
+// const testRecordRoutes = express.Router();
+const testRecordRoutes = Router();
+
 // Remember- the main difference (between express() vs.  express.router()) is that express() is a top level function, which means it performs core functionality for the library and it contains its own methods where, as a matter of fact, Router is one, and that is why when we create a specific router we chain the Router() method on express , kind of like how we use app.
 
 //START DEBUG

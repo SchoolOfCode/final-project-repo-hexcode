@@ -19,10 +19,11 @@ export async function getAllEvents() {
         a.app_user_email as "organiserEmail",
         a.app_user_first_name as "organiserFirstName",
         a.app_user_last_name as "organiserLastName",
+        concat(a.app_user_first_name, ' ', a.app_user_last_name) as "organiserName",
         a.app_user_profile_pic_link as "organiserProfilePicLink",
         a.app_user_create_date_time as "organiserCreateDateTime"
     FROM event e
-    INNER JOIN app_user a ON e.organiser_user_id = a.app_user_id
+    LEFT OUTER JOIN app_user a ON e.organiser_user_id = a.app_user_id
     ORDER BY e.event_id DESC;`;
     // order descending so any event just added will be at the top
 
@@ -111,6 +112,7 @@ export async function getAllEventsByAppUserId(requestedUserId) {
 
             a.app_user_first_name as "organiserFirstName",
             a.app_user_last_name as "organiserLastName",
+            concat(a.app_user_first_name, ' ', a.app_user_last_name) as "organiserName",
             a.app_user_email as "organiserEmail",
             a.app_user_profile_pic_link as "organiserProfilePicLink",
             a.app_user_create_date_time as "organiserCreateDateTime",
@@ -165,6 +167,7 @@ export async function getEventById(eventId) {
             a.app_user_email as "organiserEmail",
             a.app_user_first_name as "organiserFirstName",
             a.app_user_last_name as "organiserLastName",
+            concat(a.app_user_first_name, ' ', a.app_user_last_name) as "organiserName",
             a.app_user_profile_pic_link as "organiserProfilePicLink",
             a.app_user_create_date_time as "organiserCreateDateTime"
 
@@ -181,7 +184,10 @@ export async function getEventById(eventId) {
     debugOut(`/models/events.js - getEventById`, `data.rows = ${data.rows}`);
     debugOut(`/models/events.js - getEventById`, data.rows, true);
 
-    return data.rows;
+    // ---- NB: Now just return object not array of 1 object - more RESTful says ARshi  ----
+    // return data.rows;
+    const eventObject = data.rows[0];
+    return eventObject;
 }
 
 // ************************************************

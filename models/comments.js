@@ -6,10 +6,12 @@ import { debugOut, infoOut } from "../utils/logging.js";
 //             (test purposes only)
 // *****************************************************
 export async function getAllComments() {
+    //08-Mar SC: NB - just added datetime, which is a copy of commentDatePosted, because the front end currently needs to send soemthing called datetime into the AntDesign Comment Componenet, so i'm adding it here in case people forget to tranlsate it on the front end
     const sqlString = `SELECT
             c.comment_id as "commentId", 
             c.comment_text as "commentText",
             to_char(c.comment_date_posted,'DD-MM-YYYY') as "commentDatePosted",
+            to_char(c.comment_date_posted,'DD-MM-YYYY') as "datetime",
             to_char(c.comment_create_date_time,'DD-MM-YYYY HH:MM:SS') as "commentDateTimePosted",
             AGE(c.comment_create_date_time) as "commentAge",
             c.comment_create_date_time as "commentCreateDateTime",
@@ -18,6 +20,7 @@ export async function getAllComments() {
             a.app_user_has_account as "authorHasAccount",
             a.app_user_first_name as "authorFirstName",
             a.app_user_last_name as "authorLastName",
+            concat(a.app_user_first_name, ' ', a.app_user_last_name) as "authorName",
             a.app_user_profile_pic_link as "authorProfilePicLink",
             a.app_user_create_date_time as "authorCreateDateTime",
             e.organiser_user_id as "organiserUserId",
@@ -32,9 +35,9 @@ export async function getAllComments() {
             e.event_create_date_time as "eventCreateDateTime"
 
         FROM comment c
-        INNER JOIN app_user a ON c.author_user_id = a.app_user_id
-        INNER JOIN event e ON c.event_id = e.event_id
-        ORDER BY c.comment_id DESC;`;
+        LEFT OUTER JOIN app_user a ON c.author_user_id = a.app_user_id
+        LEFT OUTER JOIN event e ON c.event_id = e.event_id
+        ORDER BY c.comment_create_date_time DESC;`;
 
     debugOut(
         `/models/comments.js - getAllComments`,
@@ -69,6 +72,7 @@ export async function getAllCommentsByEvent(eventId) {
             a.app_user_has_account as "authorHasAccount",
             a.app_user_first_name as "authorFirstName",
             a.app_user_last_name as "authorLastName",
+            concat(a.app_user_first_name, ' ', a.app_user_last_name) as "authorName",
             a.app_user_profile_pic_link as "authorProfilePicLink",
             a.app_user_create_date_time as "authorCreateDateTime",
             e.organiser_user_id as "organiserUserId",
@@ -85,7 +89,8 @@ export async function getAllCommentsByEvent(eventId) {
         FROM comment c
         INNER JOIN app_user a ON c.author_user_id = a.app_user_id
         INNER JOIN event e ON c.event_id = e.event_id
-        WHERE e.event_id = $1;`;
+        WHERE e.event_id = $1
+        ORDER BY c.comment_create_date_time DESC;`;
 
     const sqlStringParams = [eventId];
     debugOut(
