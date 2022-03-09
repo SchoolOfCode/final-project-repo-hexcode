@@ -1,4 +1,6 @@
-import express from "express";
+// import express from "express";
+import Router from "express-promise-router";
+
 import { debugOut, infoOut } from "../utils/logging.js";
 import {
     getAllAppUsers,
@@ -8,19 +10,28 @@ import {
 import { getAllEventsByAppUserId } from "../models/events.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
 import { getAllContactsByOwnerUserId } from "../models/contacts.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
 
-const appUserRoutes = express.Router();
+import { isNotNumeric } from "../utils/checktypes.js";
+
+// const appUserRoutes = express.Router();
+const appUserRoutes = Router();
+
 debugOut(`/routes/appUsers.js`, `script start`);
 
 // ************************************************
 //       GET ALL APP USERS
 // ************************************************
 appUserRoutes.get("/", async (req, res) => {
-    const searchResults = await getAllAppUsers();
+    // the following is use to test the error-handling.
+    // comment out when not in dev!
+    // throw new Error(`routes/Appusers.js: Get all  users - testing error`);
+    debugOut(`/routes/appUsers.js`, `calling getAllAppUsers`);
+
+    const allAppUsersArray = await getAllAppUsers();
 
     res.json({
         success: true,
         message: `Retrieved all app users`,
-        payload: searchResults,
+        payload: allAppUsersArray,
     });
 
     return;
@@ -30,21 +41,38 @@ appUserRoutes.get("/", async (req, res) => {
 //       GET  APP USER for a given APP USER EMAIL (query)
 // ***********************************************************
 // FRONT END SENDs:   GET to  /appusers/search?email=user@user.com
-// eg http://localhost:3000/appusers/search?email=belinda@belinda.com
+// eg http://localhost:5000/appusers/search?email=belinda@belinda.com
 //
 // FYI: Express parses query string parameters by default, and puts them into the req.query property
 appUserRoutes.get(`/search`, async (req, res) => {
-    // const appUserEmail = req.query["email"];
+    debugOut(`/routes/appUsers.js - search`, `calling getAppUserFromEmail`);
 
-    //TODO: need try/catch eror code around this!
     const appUserEmail = req.query.email;
+    //check that the 'email' key value pair has been sent - otherwise return without attempting the search
+    if (appUserEmail === undefined) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - email query string parameter not found`,
+            payload: null,
+        });
+        return;
+    }
 
-    const searchResults = await getAppUserFromEmail(appUserEmail);
+    const userObject = await getAppUserFromEmail(appUserEmail);
 
+    //check userObject - will either be undefined or will be a user object (NO ARRAY ANY MORE)
+    if (userObject === undefined) {
+        res.status(404).json({
+            success: false,
+            message: `hexcode - user not found for this email address`,
+            payload: null,
+        });
+        return;
+    }
     res.json({
         success: true,
         message: `Retrieved app user with app user email of ${appUserEmail}`,
-        payload: searchResults,
+        payload: userObject,
     });
 });
 
@@ -54,13 +82,58 @@ appUserRoutes.get(`/search`, async (req, res) => {
 // FYI: Express also supports named route parameters and puts them in the req.params object. Named route parameters are always strings, and Express automatically decodes them using decodeUriComponent().
 appUserRoutes.get(`/:id`, async (req, res) => {
     const appUserId = req.params.id;
-    const searchResults = await getAppUserById(appUserId);
 
+    debugOut(`/routes/appUsers.js - appusers/id`, `start`);
+
+    //check that the 'id' key value pair has been sent - otherwise return without attempting the search
+    if (appUserId === undefined || appUserId === null) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - (app user) id parameter not found`,
+            payload: null,
+        });
+        debugOut(
+            `/routes/appUsers.js - appusers/id`,
+            `appUserId is undefined or null = |${appUserId}|`
+        );
+        return;
+    }
+
+    // if (!(typeof appUserId === "number")) {
+    if (isNotNumeric(appUserId)) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - (app user) id parameter must be integer`,
+            payload: null,
+        });
+        debugOut(
+            `/routes/appUsers.js - appusers/id`,
+            `appUserId is not integer = |${appUserId}| type = |${typeof appUserId}|`
+        );
+        return;
+    }
+    debugOut(`/routes/appUsers.js - appusers/id`, `calling getAppUserById`);
+    const userObject = await getAppUserById(appUserId);
+
+    //check userObject - will either be undefined (if no user was retrieved) or will be a user object (NO ARRAY ANY MORE)
+    if (userObject === undefined) {
+        res.status(404).json({
+            success: false,
+            message: `hexcode - user record not found for id ${appUserId}`,
+            payload: null,
+        });
+        debugOut(
+            `/routes/appUsers.js - appusers/id`,
+            `returned userObject is undefined = |${userObject}|`
+        );
+        return;
+    }
     res.json({
         success: true,
-        message: `Retrieved app user with app user id ${appUserId}`,
-        payload: searchResults,
+        message: `Retrieved app user object with id of ${appUserId}`,
+        payload: userObject,
     });
+    debugOut(`/routes/appUsers.js - appusers/id`, `completed successfully`);
 });
 
 //********************************************************
@@ -71,12 +144,31 @@ appUserRoutes.get(`/:id`, async (req, res) => {
 appUserRoutes.get("/:id/events", async (req, res) => {
     const appUserId = req.params.id;
 
-    const searchResults = await getAllEventsByAppUserId(appUserId);
+    if (appUserId === undefined || appUserId === null) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - (app user) id parameter not found`,
+            payload: null,
+        });
+        return;
+    }
+
+    // if (!(typeof appUserId === "number")) {
+    if (isNotNumeric(appUserId)) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - (app user) id parameter must be integer`,
+            payload: null,
+        });
+        return;
+    }
+
+    const eventsArray = await getAllEventsByAppUserId(appUserId);
 
     res.json({
         success: true,
         message: `Retrieved all events (invited and organised) for user ${appUserId}`,
-        payload: searchResults,
+        payload: eventsArray,
     });
 });
 
@@ -89,12 +181,31 @@ appUserRoutes.get("/:id/events", async (req, res) => {
 appUserRoutes.get("/:id/contacts", async (req, res) => {
     const appUserId = req.params.id;
 
-    const searchResults = await getAllContactsByOwnerUserId(appUserId);
+    if (appUserId === undefined || appUserId === null) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - (app user) id parameter not found`,
+            payload: null,
+        });
+        return;
+    }
+
+    // if (!(typeof appUserId === "number")) {
+    if (isNotNumeric(appUserId)) {
+        res.status(400).json({
+            success: false,
+            message: `hexcode - (app user) id parameter must be integer`,
+            payload: null,
+        });
+        return;
+    }
+
+    const contactsArray = await getAllContactsByOwnerUserId(appUserId);
 
     res.json({
         success: true,
         message: `Retrieved all contacts for user ${appUserId}`,
-        payload: searchResults,
+        payload: contactsArray,
     });
 });
 //********************************************************

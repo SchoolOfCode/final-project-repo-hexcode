@@ -1,7 +1,10 @@
-import express from "express";
+// import express from "express";
+import Router from "express-promise-router";
+
 import { debugOut, infoOut } from "../utils/logging.js";
 
-const homePageRoutes = express.Router();
+// const homePageRoutes = express.Router();
+const homePageRoutes = Router();
 
 debugOut(`/routes/homepage.js`, `script start`);
 

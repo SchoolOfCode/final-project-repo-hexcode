@@ -1,4 +1,6 @@
-import express from "express";
+// import express from "express";
+import Router from "express-promise-router";
+
 import { debugOut, infoOut } from "../utils/logging.js";
 import {
     getAllEventInvitees,
@@ -6,7 +8,8 @@ import {
 } from "../models/eventInvitees.js";
 
 debugOut(`/routes/eventInvitees.js`, `script start`);
-const eventInviteeRoutes = express.Router();
+// const eventInviteeRoutes = express.Router();
+const eventInviteeRoutes = Router();
 
 // *****************************************************
 //       GET ALL EVENT INVITEES (regardless of event)

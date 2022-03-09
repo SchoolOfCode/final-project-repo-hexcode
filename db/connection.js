@@ -15,7 +15,11 @@ import { DATABASE_URL } from "../config.js";
 //         rejectUnauthorized: false,
 //     },
 // });
-const pool = new pg.Pool({
+//fyi - THIS POLL WAS PRIVATE - BECAUSE IT'S NOT EXPORTED.
+// However, for Jest - we will need tobe able to need access to it
+// - so therefore we need to export it.
+// const pool = new pg.Pool({
+export const pool = new pg.Pool({
     //set up connection string object
     connectionString: DATABASE_URL,
     max: 20,

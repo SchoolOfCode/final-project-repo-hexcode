@@ -1,9 +1,11 @@
-import express from "express";
+// import express from "express";
+import Router from "express-promise-router";
 import { debugOut, infoOut } from "../utils/logging.js";
 import { getAllContacts } from "../models/contacts.js";
 
 debugOut(`/routes/contacts.js`, `script start`);
-const contactRoutes = express.Router();
+// const contactRoutes = express.Router();
+const contactRoutes = Router();
 
 // *****************************************************
 //       GET ALL CONTACTS (regardless of user)
