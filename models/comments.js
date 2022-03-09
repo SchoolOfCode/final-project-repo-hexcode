@@ -37,7 +37,7 @@ export async function getAllComments() {
         FROM comment c
         LEFT OUTER JOIN app_user a ON c.author_user_id = a.app_user_id
         LEFT OUTER JOIN event e ON c.event_id = e.event_id
-        ORDER BY c.comment_id DESC;`;
+        ORDER BY c.comment_create_date_time DESC;`;
 
     debugOut(
         `/models/comments.js - getAllComments`,
@@ -89,7 +89,8 @@ export async function getAllCommentsByEvent(eventId) {
         FROM comment c
         INNER JOIN app_user a ON c.author_user_id = a.app_user_id
         INNER JOIN event e ON c.event_id = e.event_id
-        WHERE e.event_id = $1;`;
+        WHERE e.event_id = $1
+        ORDER BY c.comment_create_date_time DESC;`;
 
     const sqlStringParams = [eventId];
     debugOut(
