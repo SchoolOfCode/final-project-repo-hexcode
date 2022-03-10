@@ -23,7 +23,7 @@ const sqlString = `INSERT INTO comment
         (2, 7, 'I am super excited to see everyone next week!'),
         (2, 1, 'Me too! What are you planning on wearing?'),
         (2, 3, 'Nothing special'),
-        (2, 9, 'I was going all out! Sparkles everyhere! :joy:'),
+        (2, 9, 'I was going all out! Sparkles everywhere! :joy:'),
         (2, 1, 'Great! Clear as mud, so'),
         (3, 5, 'Hey, I am lost - where is everyone?'),
         (3, 7, 'We are down at the docks unloading the kayaks'),
