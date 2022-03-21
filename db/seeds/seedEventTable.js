@@ -22,11 +22,11 @@ const sqlString = `INSERT INTO event
                     VALUES
                         (1, 'Mary 31st Birthday Dinner', 'Let us arrange dinner at Marcos restaurant for Marys birthday. I will set up a poll for dates', 'Lemon Restaurant', NULL, '8pm', 'No gifts - just bring yourselves', 'Dinner'),
 
-                        (1, 'Spa Day', 'Hey girls! We have talked about spa day loads. Lets just do it', 'Hoar Cross Hotel Spa', '2022-04-25', NULL, 'No gifts - just bring yourselves', 'Dinner'),
+                        (1, 'Spa Day', 'Hey girls! We have talked about spa day loads. Lets just do it', 'Hoar Cross Hotel Spa', NULL, NULL, 'No gifts - just bring yourselves', 'Dinner'),
 
-                        (1, 'Sea Kayaking', 'Let us book in the next sea kayaking evening', 'Shadwell Basin', '2022-05-16', '6pm', 'Kayaks provided. Bring wetsuits', 'Exercise'),
+                        (1, 'Sea Kayaking', 'Let us book in the next sea kayaking evening', 'Shadwell Basin', NULL, '6pm', 'Kayaks provided. Bring wetsuits', 'Exercise'),
                         
-                        (4, 'Birthday Party for Mum', 'Let us book in a date for gathering at mums house for her birthday', 'Mums House', '2022-06-15', '6pm', 'Bring food', 'Family Gathering');`;
+                        (4, 'Birthday Party for Mum', 'Let us book in a date for gathering at mums house for her birthday', 'Mums House', NULL, '6pm', 'Bring food', 'Family Gathering');`;
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
