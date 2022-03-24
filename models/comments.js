@@ -99,10 +99,7 @@ export async function getAllCommentsByEvent(eventId) {
     );
 
     const data = await query(sqlString, sqlStringParams);
-    debugOut(
-        `/models/comments.js - getAllCommentsByEvent`,
-        `data.rows = ${data.rows}`
-    );
+
     debugOut(`/models/comments.js - getAllCommentsByEvent`, data.rows, true);
 
     return data.rows;
@@ -146,6 +143,6 @@ export async function postComment(newComment) {
         `NEW COMMENT_ID is: ${newCommentId}`
     );
 
-    //TODO: maybe change what's returned. Ony returning  newCommentId for now
+    //TODO: change what's returned. Ony returning newCommentId for now
     return newCommentId;
 }

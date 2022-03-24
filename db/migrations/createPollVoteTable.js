@@ -8,14 +8,15 @@ const sqlString = `CREATE TABLE IF NOT EXISTS poll_vote
                     poll_vote_date_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
                     )`;
 
-
-
 async function executeSQL() {
-console.log(`DEBUG: sqlString = ${sqlString}`);     
+    console.log(`DEBUG: sqlString = ${sqlString}`);
 
-const res = await query(sqlString);
+    const res = await query(sqlString);
 
-console.log("DEBUG: db/migrations/createPollVoteTable.js: Created table", res);
+    console.log(
+        "DEBUG: db/migrations/createPollVoteTable.js: Created table",
+        res
+    );
 }
 console.log(
     "DEBUG: db/migrations/createPollVoteTable.js: about to attempt to execute create table sql"

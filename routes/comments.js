@@ -1,10 +1,9 @@
-// import express from "express";
-import Router from "express-promise-router";
-import { debugOut, infoOut } from "../utils/logging.js";
+import Router from "express-promise-router"; // Implementing Error Handling: replaced `import express from "express";`
+
+import { debugOut } from "../utils/logging.js";
 import { getAllComments, postComment } from "../models/comments.js";
 
-//const commentRoutes = express.Router();
-const commentRoutes = Router();
+const commentRoutes = Router(); // Implementing Error Handling: replaced standard express.Router() with Router() from express-promise-router
 
 debugOut(`routes/comments.js`, `script start`);
 
@@ -32,7 +31,7 @@ commentRoutes.get("/", async (req, res) => {
 //       POST NEW COMMENT for a given EVENT ID (and AUTHOR ID)
 // ************************************************************
 commentRoutes.post("*", async function (req, res) {
-    //TODO: put try/catch error code here
+    // TODO: add any specific error-checking
 
     //insert the comment, and reeive back the new comment object, including new comment id.
     const postResults = await postComment(req.body); //have updated postResults to contain newCommentObject or new comment_id

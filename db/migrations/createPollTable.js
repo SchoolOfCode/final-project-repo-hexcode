@@ -11,8 +11,6 @@ const sqlString = `CREATE TABLE IF NOT EXISTS poll
                         poll_status VARCHAR(10) DEFAULT 'OPEN',
                         poll_create_date_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
                         )`;
-//BUG FIX - TIME not saving in createdatetime: Replacing TIMESTAMP NOT NULL DEFAULT CURRENT_DATE with TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-
 // TODO: refactor to include relevant foreign key constraints
 
 async function executeSQL() {

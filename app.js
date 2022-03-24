@@ -1,11 +1,13 @@
 //set up express, and the routes
 import express from "express";
 import { debugOut, infoOut } from "./utils/logging.js";
+
 // Note: This article on cors was very useful. cors package is needed because front end and back end are hosted separately
 //       https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/
 import cors from "cors";
 
 // START TODO: as we write router files, add import for each:
+//FYI we could call each import (homePageRoutes etc) anything suitable - it's an alias for router defined inside routes/testRecords.js
 import homePageRoutes from "./routes/homePage.js";
 //import testRecordRoutes from "./routes/testRecords.js"; //removing as no longer needed. there's enough real routes as templates
 import eventRoutes from "./routes/events.js";
@@ -13,7 +15,6 @@ import appUserRoutes from "./routes/appUsers.js";
 import commentRoutes from "./routes/comments.js";
 import eventInviteeRoutes from "./routes/eventInvitees.js";
 import contactRoutes from "./routes/contacts.js";
-//FYI we could call each import (testRecordRoutes etc) anything suitable - it's an alias for router defined inside routes/testRecords.js
 //END TODO:
 debugOut(`/app.js`, `script start.`);
 
@@ -44,7 +45,7 @@ app.use("/eventinvitees", eventInviteeRoutes);
 app.use("/contacts", contactRoutes);
 //END TODO:
 
-//In conjunction with installing the express-promise-router package,  we are adding code to capture any errors that the package now handles, and return them nicely to the front end.
+// In conjunction with installing the express-promise-router package,  we are adding code to capture any errors that the package now handles, and return them nicely to the front end.
 app.use((err, req, res, next) => {
     console.error(err?.stack ?? err);
     //FYI - http status code 500 means some generic serverside error.

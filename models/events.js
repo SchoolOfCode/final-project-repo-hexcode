@@ -25,17 +25,12 @@ export async function getAllEvents() {
     FROM event e
     LEFT OUTER JOIN app_user a ON e.organiser_user_id = a.app_user_id
     ORDER BY e.event_id DESC;`;
-    // order descending so any event just added will be at the top
+    // Note: sorted by event id DESCENDING, so any event just added will be at the top
 
-    // console.log(`DEBUG: sqlString = ${sqlString}`);
     debugOut(`/models/events.js - getAllEvents`, `sqlString = ${sqlString}`);
 
     const data = await query(sqlString);
 
-    // console.log(`DEBUG: data = ${data}`);
-    debugOut(`/models/events.js - getAllEvents`, `data = ${data}`);
-
-    // console.log(`DEBUG: data.rows = ${data.rows}`);
     debugOut(`/models/events.js - getAllEvents`, `data.rows = ${data.rows}`);
 
     return data.rows;
@@ -138,10 +133,6 @@ export async function getAllEventsByAppUserId(requestedUserId) {
 
     const data = await query(sqlString, sqlStringParams);
 
-    debugOut(
-        `/models/events.js - getAllEventsForOneUser`,
-        `data.rows = ${data.rows}`
-    );
     debugOut(`/models/events.js - getAllEventsForOneUser`, data.rows, true);
 
     return data.rows;
@@ -245,10 +236,11 @@ export async function postEvent(newEvent) {
     debugOut(`/models/events.js - postEvent`, `NEW EVENT_ID is: ${newEventId}`);
 
     //TODO: maybe change what's returned. Ony returning new event id for now
+    //      we could return result, or could specifically just return the new event object (result.rows[0]) - BUT WOULD FIRST NEED TO MAP from TABLE_NAMES TO frontEndNames
     return newEventId;
-    //we could return result, or could specifically just return the new event object (result.rows[0]) - BUT WOULD FIRST NEED TO MAP from TABLE_NAMES TO frontEndNames
 }
 
 // ************************************************
 // UPDATE an event (given an event_id) (probably a PATCH
 // ************************************************
+// TODO: add this model.

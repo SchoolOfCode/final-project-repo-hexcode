@@ -1,15 +1,14 @@
-// import express from "express";
-import Router from "express-promise-router";
+import Router from "express-promise-router"; // Implementing Error Handling: replaced `import express from "express";`
 
-import { debugOut, infoOut } from "../utils/logging.js";
+import { debugOut } from "../utils/logging.js";
 import {
     getAllEventInvitees,
     postEventInvitee,
 } from "../models/eventInvitees.js";
 
 debugOut(`/routes/eventInvitees.js`, `script start`);
-// const eventInviteeRoutes = express.Router();
-const eventInviteeRoutes = Router();
+
+const eventInviteeRoutes = Router(); // Implementing Error Handling: replaced standard express.Router() with Router() from express-promise-router
 
 // *****************************************************
 //       GET ALL EVENT INVITEES (regardless of event)
@@ -39,13 +38,11 @@ eventInviteeRoutes.get("/", async (req, res) => {
 //*****************************************************************
 //       POST ONE EVENT_INVITEE and return new EVENT_INVITEE_ID
 //
-//       (will need the eventInvitee's event_id and user id of
-//        the person who issued the invite)
+//       (will need the event id, plus the app user id for both
+//       the invitor (who issued the invite) and the invitee
 // *****************************************************************
-// TODO: add in route to redirect a POST event invitee record - THE MODEL EXISTS
 eventInviteeRoutes.post("*", async function (req, res) {
-    //TODO: put try/catch error code here
-
+    // TODO: add any specific error-checking
     const postResults = await postEventInvitee(req.body);
     debugOut(
         `routes/eventinvitees.js/POST new Event Invitee`,

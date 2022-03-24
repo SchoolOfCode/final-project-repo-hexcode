@@ -1,29 +1,29 @@
-// import express from "express";
-import Router from "express-promise-router";
+import Router from "express-promise-router"; // Implementing Error Handling: replaced `import express from "express";`
 
-import { debugOut, infoOut } from "../utils/logging.js";
+import { debugOut } from "../utils/logging.js";
 import {
     getAllAppUsers,
     getAppUserById,
     getAppUserFromEmail,
 } from "../models/appUsers.js";
-import { getAllEventsByAppUserId } from "../models/events.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
-import { getAllContactsByOwnerUserId } from "../models/contacts.js"; //NB - note this imports from events not from AppUsers, which is  slightly unusual for the AppUsers routes script
+
+import { getAllEventsByAppUserId } from "../models/events.js"; // Note: this imports from EVENTS model file, not from appUsers model file
+
+import { getAllContactsByOwnerUserId } from "../models/contacts.js"; // Note: this imports from CONTACTS model file, not from appUsers model file
 
 import { isNotNumeric } from "../utils/checktypes.js";
 
-// const appUserRoutes = express.Router();
-const appUserRoutes = Router();
+const appUserRoutes = Router(); // Implementing Error Handling: replaced standard express.Router() with Router() from express-promise-router
 
 debugOut(`/routes/appUsers.js`, `script start`);
 
 // ************************************************
 //       GET ALL APP USERS
+//           (test purposes only)
+//       e.g.
+//           /appusers
 // ************************************************
 appUserRoutes.get("/", async (req, res) => {
-    // the following is use to test the error-handling.
-    // comment out when not in dev!
-    // throw new Error(`routes/Appusers.js: Get all  users - testing error`);
     debugOut(`/routes/appUsers.js`, `calling getAllAppUsers`);
 
     const allAppUsersArray = await getAllAppUsers();
@@ -33,22 +33,20 @@ appUserRoutes.get("/", async (req, res) => {
         message: `Retrieved all app users`,
         payload: allAppUsersArray,
     });
-
-    return;
 });
 
 // ***********************************************************
 //       GET  APP USER for a given APP USER EMAIL (query)
+//       e.g.
+//           GET to  /appusers/search?email=user@user.com
 // ***********************************************************
-// FRONT END SENDs:   GET to  /appusers/search?email=user@user.com
-// eg http://localhost:5000/appusers/search?email=belinda@belinda.com
-//
+
 // FYI: Express parses query string parameters by default, and puts them into the req.query property
 appUserRoutes.get(`/search`, async (req, res) => {
     debugOut(`/routes/appUsers.js - search`, `calling getAppUserFromEmail`);
 
     const appUserEmail = req.query.email;
-    //check that the 'email' key value pair has been sent - otherwise return without attempting the search
+    // ERROR CHECKING: check that the 'email' key value pair has been sent - otherwise return without attempting the search
     if (appUserEmail === undefined) {
         res.status(400).json({
             success: false,
@@ -60,7 +58,7 @@ appUserRoutes.get(`/search`, async (req, res) => {
 
     const userObject = await getAppUserFromEmail(appUserEmail);
 
-    //check userObject - will either be undefined or will be a user object (NO ARRAY ANY MORE)
+    // ERROR CHECKING: check userObject - will either be undefined or will be a user object (NO ARRAY ANY MORE)
     if (userObject === undefined) {
         res.status(404).json({
             success: false,
@@ -69,6 +67,8 @@ appUserRoutes.get(`/search`, async (req, res) => {
         });
         return;
     }
+
+    //OTHERWISE RETURN SUCCESS:
     res.json({
         success: true,
         message: `Retrieved app user with app user email of ${appUserEmail}`,
@@ -78,14 +78,17 @@ appUserRoutes.get(`/search`, async (req, res) => {
 
 // ************************************************
 //     GET ONE APP USER for a given APP USER ID
+//     e.g.
+//         /appusers/:3, where 3 is an app_user_id
 // ************************************************
-// FYI: Express also supports named route parameters and puts them in the req.params object. Named route parameters are always strings, and Express automatically decodes them using decodeUriComponent().
+// FYI: Express also supports named route parameters and puts them in the req.params object.
+//      Named route parameters are always strings, and Express automatically decodes them using decodeUriComponent().
 appUserRoutes.get(`/:id`, async (req, res) => {
     const appUserId = req.params.id;
 
     debugOut(`/routes/appUsers.js - appusers/id`, `start`);
 
-    //check that the 'id' key value pair has been sent - otherwise return without attempting the search
+    // ERROR CHECKING: check that the 'id' key value pair has been sent - otherwise return without attempting the search
     if (appUserId === undefined || appUserId === null) {
         res.status(400).json({
             success: false,
@@ -99,8 +102,9 @@ appUserRoutes.get(`/:id`, async (req, res) => {
         return;
     }
 
-    // if (!(typeof appUserId === "number")) {
+    //  ERROR CHECKING:
     if (isNotNumeric(appUserId)) {
+        // replaced `if (!(typeof appUserId === "number"))`, with my own function to standardise, and remove duplication
         res.status(400).json({
             success: false,
             message: `hexcode - (app user) id parameter must be integer`,
@@ -115,7 +119,7 @@ appUserRoutes.get(`/:id`, async (req, res) => {
     debugOut(`/routes/appUsers.js - appusers/id`, `calling getAppUserById`);
     const userObject = await getAppUserById(appUserId);
 
-    //check userObject - will either be undefined (if no user was retrieved) or will be a user object (NO ARRAY ANY MORE)
+    //  ERROR CHECKING: check returned userObject - will either be undefined (if no user was retrieved) or will be a user object (NO ARRAY ANY MORE)
     if (userObject === undefined) {
         res.status(404).json({
             success: false,
@@ -128,6 +132,8 @@ appUserRoutes.get(`/:id`, async (req, res) => {
         );
         return;
     }
+
+    //OTHERWISE RETURN SUCCESS:
     res.json({
         success: true,
         message: `Retrieved app user object with id of ${appUserId}`,
@@ -144,6 +150,7 @@ appUserRoutes.get(`/:id`, async (req, res) => {
 appUserRoutes.get("/:id/events", async (req, res) => {
     const appUserId = req.params.id;
 
+    //  ERROR CHECKING:
     if (appUserId === undefined || appUserId === null) {
         res.status(400).json({
             success: false,
@@ -153,7 +160,7 @@ appUserRoutes.get("/:id/events", async (req, res) => {
         return;
     }
 
-    // if (!(typeof appUserId === "number")) {
+    //  ERROR CHECKING:
     if (isNotNumeric(appUserId)) {
         res.status(400).json({
             success: false,
@@ -164,7 +171,9 @@ appUserRoutes.get("/:id/events", async (req, res) => {
     }
 
     const eventsArray = await getAllEventsByAppUserId(appUserId);
+    // Note: we don't check returned array, because an empty array is acceptable here
 
+    //OTHERWISE RETURN SUCCESS:
     res.json({
         success: true,
         message: `Retrieved all events (invited and organised) for user ${appUserId}`,
@@ -181,6 +190,7 @@ appUserRoutes.get("/:id/events", async (req, res) => {
 appUserRoutes.get("/:id/contacts", async (req, res) => {
     const appUserId = req.params.id;
 
+    //  ERROR CHECKING:
     if (appUserId === undefined || appUserId === null) {
         res.status(400).json({
             success: false,
@@ -190,7 +200,7 @@ appUserRoutes.get("/:id/contacts", async (req, res) => {
         return;
     }
 
-    // if (!(typeof appUserId === "number")) {
+    //  ERROR CHECKING:
     if (isNotNumeric(appUserId)) {
         res.status(400).json({
             success: false,
@@ -201,7 +211,9 @@ appUserRoutes.get("/:id/contacts", async (req, res) => {
     }
 
     const contactsArray = await getAllContactsByOwnerUserId(appUserId);
+    // Note: we don't check returned array, because an empty array is acceptable here
 
+    //OTHERWISE RETURN SUCCESS:
     res.json({
         success: true,
         message: `Retrieved all contacts for user ${appUserId}`,

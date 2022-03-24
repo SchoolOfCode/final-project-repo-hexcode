@@ -22,8 +22,6 @@ const sqlString = `CREATE TABLE IF NOT EXISTS event
 // FOREIGN KEY(organiser_user_id)
 //    REFERENCES app_user(app_user_id)
 
-//BUG FIX - TIME not saving in createdatetime: Replacing TIMESTAMP NOT NULL DEFAULT CURRENT_DATE with TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
 

@@ -1,10 +1,8 @@
-// import express from "express";
-import Router from "express-promise-router";
+import Router from "express-promise-router"; // Implementing Error Handling: replaced `import express from "express";`
 
 import { debugOut, infoOut } from "../utils/logging.js";
 
-// const homePageRoutes = express.Router();
-const homePageRoutes = Router();
+const homePageRoutes = Router(); // Implementing Error Handling: replaced standard express.Router() with Router() from express-promise-router
 
 debugOut(`/routes/homepage.js`, `script start`);
 

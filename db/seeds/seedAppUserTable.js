@@ -1,7 +1,7 @@
 import query from "../connection.js";
 
 // **********************************************************************
-// NB - SEE readme-how-data-relates.md BEFORE ADDING/CHANGING THIS DATA
+// NB - SEE readme-seed-data-setup.md BEFORE ADDING/CHANGING THIS DATA
 // **********************************************************************
 // NB - records 1 - 5 are FULL users (app_user_has_account = TRUE)
 // NB - records 6 - 9 are for invitee-only users (app_user_has_account = FALSE)
@@ -27,12 +27,10 @@ const sqlString = `INSERT INTO app_user
         ('mike@mike.com', FALSE,  'Mike','Duffy','8.png'),
         ('katie@katie.com', FALSE,  'Katie','Smith', '9.png');`;
 
-// TODO: the correct data is below (commented out) . Contacts that have not set up an app login should NOT
+// TODO: the correct data is below (commented out) because contacts that have not set up an app login should NOT
 //       have a name or profile pic in the app user table.
 //       The name should be taken from the contacts table.
-//       However, as a temporary measure, I'm adding in names etc, to make the SQL for the models easier/faster
-//       Will select names from app_user rather than going via contacts table
-//      This means
+//       However, as a temporary measure, I'm adding in names etc, to make the SQL for selecting the names of invitees easier/faster, because now we can (temporarily) select all names from app_user rather than going via contacts table
 // ('belinda@belinda.com', TRUE, 'Belinda','Duffy', '1.png'),
 // ('maria@maria.com', TRUE, 'Maria','Rushmore', '2.png'),
 // ('akiko@akiko.com', TRUE, 'Akiko','Jones', '3.png'),

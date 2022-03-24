@@ -1,7 +1,7 @@
 import query from "../connection.js";
 
 // **********************************************************************
-// NB - SEE readme-how-data-relates.md BEFORE ADDING/CHANGING THIS DATA
+// NB - SEE readme-seed-data-setup.md BEFORE ADDING/CHANGING THIS DATA
 // **********************************************************************
 // NB - organiser_user_id can ONLY be 1 to 5 (i.e. only full users can organise events)
 //

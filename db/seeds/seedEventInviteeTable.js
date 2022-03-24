@@ -1,7 +1,7 @@
 import query from "../connection.js";
 
 // **********************************************************************
-// NB - SEE readme-how-data-relates.md BEFORE ADDING/CHANGING THIS DATA
+// NB - SEE readme-seed-data-setup.md BEFORE ADDING/CHANGING THIS DATA
 // **********************************************************************
 // NB - invitee_user_id can only any users, with or without accounts, so 1 to 9
 // NB - invite_issuer_user_id can ONLY be 1 to 5 (i.e. only full users can invite and can have contact lists)
@@ -34,7 +34,7 @@ const sqlString = `INSERT INTO event_invitee
         (4, 4, 1, 'GOING', NULL),
         (4, 4, 8, 'GOING', NULL),
         (4, 4, 9, 'TBC', NULL);`;
-//TODO: for the invitees that are 'GOING' update their 'rsvp logged date time to a non-null value, e.g. 2022-03-03 13:23:38.385512+00, - NEED TO CHECK WHAT FORMATWILL BE ACCEPTED BY DATABASE
+//TODO: for the invitees that are 'GOING', update their 'rsvp logged date time to a non-null value, e.g. 2022-03-03 13:23:38.385512+00, - NEED TO CHECK WHAT FORMATWILL BE ACCEPTED BY DATABASE
 
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
