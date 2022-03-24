@@ -3,6 +3,9 @@ import { debugOut, infoOut } from "../utils/logging.js";
 
 // ************************************************
 //       GET ALL APP USERS
+//           (test purposes only)
+//       e.g.
+//           /appusers
 // ************************************************
 export async function getAllAppUsers() {
     const sqlString = `SELECT a.app_user_id as "appUserId",
@@ -16,18 +19,22 @@ export async function getAllAppUsers() {
         FROM app_user a
         ORDER BY a.app_user_id DESC;`;
 
-    console.log(`DEBUG: sqlString = ${sqlString}`);
+    debugOut(
+        `/models/appUsers.js - getAllAppUsers`,
+        `sqlString = ${sqlString}`
+    );
 
     const data = await query(sqlString);
 
-    console.log(`DEBUG: data = `);
-    console.log(data);
+    debugOut(`/models/appUsers.js - getAllAppUsers`, data.rows, true);
 
     return data.rows;
 }
 
 // ***********************************************************
 //       GET  APP USER for a given APP USER EMAIL (query)
+//       e.g.
+//           GET to  /appusers/search?email=user@user.com
 // ***********************************************************
 export async function getAppUserFromEmail(appUserEmail) {
     const sqlString = `SELECT a.app_user_id as "appUserId",
@@ -43,21 +50,24 @@ export async function getAppUserFromEmail(appUserEmail) {
 
     const sqlStringParams = [appUserEmail];
 
-    console.log(`DEBUG: sqlString = ${sqlString}`);
+    debugOut(
+        `/models/appUsers.js - getAppUserFromEmail`,
+        `sqlString = ${sqlString}`
+    );
 
     const data = await query(sqlString, sqlStringParams);
 
-    console.log(`DEBUG: data = `);
-    console.log(data);
+    debugOut(`/models/appUsers.js - getAppUserFromEmail`, data.rows, true);
 
-    // ---- NB: Now just return object not array of 1 object - more RESTful says ARshi  ----
-    // return data.rows;
+    // ---- NB: Now we just return the object itself, NOT an array of 1 object - more RESTful says Arshi  ----
     const appUserObject = data.rows[0];
     return appUserObject;
 }
 
 // ************************************************
 //     GET ONE APP USER for a given APP USER ID
+//     e.g.
+//         /appusers/:3, where 3 is an app_user_id
 // ************************************************
 export async function getAppUserById(appUserId) {
     const sqlString = `SELECT a.app_user_id as "appUserId",
@@ -73,19 +83,24 @@ export async function getAppUserById(appUserId) {
 
     const sqlStringParams = [appUserId];
 
-    console.log(`DEBUG: sqlString = ${sqlString}`);
+    debugOut(
+        `/models/appUsers.js - getAppUserById`,
+        `sqlString = ${sqlString}`
+    );
 
     const data = await query(sqlString, sqlStringParams);
 
-    console.log(`DEBUG: data = `);
-    console.log(data);
+    debugOut(`/models/appUsers.js - getAppUserById`, data.rows, true);
 
-    // ---- TODO: return object not array of 1 object - more RESTful says ARshi  ----
-    // const appUserObject = data.rows;
+    // ---- NB: Now we just return the object itself, NOT an array of 1 object - more RESTful says Arshi  ----
     const appUserObject = data.rows[0];
     return appUserObject;
 }
 
-// INSERT ONE APP USER (POST) - Beyond MVP
+// ************************************************
+// TODO: INSERT ONE APP USER (POST) - Beyond MVP
+// ************************************************
 
-// UPDATE ONE APP USER (PUT or PATCH) - Beyond MVP
+// ************************************************
+// TODO: UPDATE ONE APP USER (PUT or PATCH) - Beyond MVP
+// ************************************************

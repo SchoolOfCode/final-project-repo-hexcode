@@ -1,6 +1,5 @@
 import query from "../connection.js";
-// ARSHI -
-// import query, { pool } from "../connection.js";
+//  TODO: ARSHI - could import query, { pool } from "../connection.js";
 
 const sqlString = `CREATE TABLE IF NOT EXISTS app_user 
                         (app_user_id serial PRIMARY KEY,
@@ -13,8 +12,7 @@ const sqlString = `CREATE TABLE IF NOT EXISTS app_user
                         )`;
 //BUG FIX - TIME not saving in createdatetime: Replacing TIMESTAMP NOT NULL DEFAULT CURRENT_DATE with TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 
-// ARSHI - could export this function - then import all of these into another
-// main file which would start pool  run all, then close pool.
+// TODO: ARSHI - could export this function - then import all of these into another main file, which would start pool  run all, then close pool.
 async function executeSQL() {
     console.log(`DEBUG: sqlString = ${sqlString}`);
 
@@ -31,8 +29,7 @@ console.log(
 );
 
 executeSQL();
-// ARSHI - adding code to always shut down the pool.
-//         NEED TO THINK about how we'd open pool once for all the scripts
+// TODO:  ARSHI - could add code to always shut down the pool. NEED TO THINK about how we'd open pool once for all the scripts
 // executeSQL().finally(async () => {
 //     await pool.end();
 // });

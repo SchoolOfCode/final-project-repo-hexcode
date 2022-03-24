@@ -1,7 +1,7 @@
 import query from "../connection.js";
 
 // **********************************************************************
-// NB - SEE readme-how-data-relates.md BEFORE ADDING/CHANGING THIS DATA
+// NB - SEE readme-seed-data-setup.md BEFORE ADDING/CHANGING THIS DATA
 // **********************************************************************
 // NB - contact_owner_user_id can only be 1 to 5 (i.e. only full users can have contact lists
 // NB - contact_user_id can only any users, with or without accounts, so 1 to 9

@@ -28,16 +28,13 @@ export async function getAllContacts() {
     ORDER BY c.contact_owner_user_id, c.contact_user_id;`;
 
     debugOut(
-        `/models/contacts.js - getAllEventInvitees`,
+        `/models/contacts.js - getAllContacts`,
         `sqlString = ${sqlString}`
     );
 
     const data = await query(sqlString);
-    debugOut(
-        `/models/contacts.js - getAllEventInvitees`,
-        `data.rows = ${data.rows}`
-    );
-    debugOut(`/models/contacts.js - getAllEventInvitees`, data.rows, true);
+
+    debugOut(`/models/contacts.js - getAllContacts`, data.rows, true);
 
     return data.rows;
 }
@@ -78,10 +75,7 @@ export async function getAllContactsByOwnerUserId(contactListOwnerUserId) {
     );
 
     const data = await query(sqlString, sqlStringParams);
-    debugOut(
-        `/models/contacts.js - getAllContactsByOwnerUserId`,
-        `data.rows = ${data.rows}`
-    );
+
     debugOut(
         `/models/contacts.js - getAllContactsByOwnerUserId`,
         data.rows,
@@ -98,7 +92,7 @@ export async function getAllContactsByOwnerUserId(contactListOwnerUserId) {
 //       who 'owns' the contact being added
 // *****************************************************************
 export async function postContact(newContact) {
-    // to post a new contact
+    // TODO: post a new contact
     // needs contactOwnerUserId
     // (1) BEYOND MVP:
     //     check to see if the contact is already in the app_user table

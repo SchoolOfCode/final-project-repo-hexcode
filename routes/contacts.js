@@ -1,11 +1,11 @@
-// import express from "express";
-import Router from "express-promise-router";
-import { debugOut, infoOut } from "../utils/logging.js";
+import Router from "express-promise-router"; // Implementing Error Handling: replaced `import express from "express";`
+
+import { debugOut } from "../utils/logging.js";
 import { getAllContacts } from "../models/contacts.js";
 
 debugOut(`/routes/contacts.js`, `script start`);
-// const contactRoutes = express.Router();
-const contactRoutes = Router();
+
+const contactRoutes = Router(); // Implementing Error Handling: replaced standard express.Router() with Router() from express-promise-router
 
 // *****************************************************
 //       GET ALL CONTACTS (regardless of user)

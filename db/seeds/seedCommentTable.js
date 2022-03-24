@@ -1,7 +1,7 @@
 import query from "../connection.js";
 
 // **********************************************************************
-// NB - SEE readme-how-data-relates.md BEFORE ADDING/CHANGING THIS DATA
+// NB - SEE readme-seed-data-setup.md BEFORE ADDING/CHANGING THIS DATA
 // **********************************************************************
 // NB - event_id can be any event SO LONG AS the author_user_id is invited (ie. there's a matching record in event_invitee table)
 // NB - author_user_id can be any user, with or without accounts, so 1 to 9

@@ -35,21 +35,20 @@ export async function getAllEventInvitees() {
     );
 
     const data = await query(sqlString);
-    debugOut(
-        `/models/eventInvitees.js - getAllEventInvitees`,
-        `data.rows = ${data.rows}`
-    );
+
     debugOut(`/models/eventInvitees.js - getAllEventInvitees`, data.rows, true);
 
     return data.rows;
 }
 
-// ************************************************
+// ****************************************************************
 //       GET ALL EVENT INVITEES for a given EVENT ID
 //       e.g.
 //       /events/:12/eventinvitees/  where 12 is an event_id
-// ************************************************
-// FYI - called from events routes, not eventInvitees routes
+//
+//       FYI - called from events routes, NOT eventInvitees routes
+// ****************************************************************
+
 export async function getAllEventInviteesByEvent(eventId) {
     const sqlString = `SELECT
         i.event_id as "eventId",
@@ -87,10 +86,7 @@ export async function getAllEventInviteesByEvent(eventId) {
     );
 
     const data = await query(sqlString, sqlStringParams);
-    debugOut(
-        `/models/eventInvitees.js - getAllEventInviteesByEvent`,
-        `data.rows = ${data.rows}`
-    );
+
     debugOut(
         `/models/eventInvitees.js - getAllEventInviteesByEvent`,
         data.rows,
@@ -103,14 +99,13 @@ export async function getAllEventInviteesByEvent(eventId) {
 // *****************************************************************
 //       POST ONE EVENT_INVITEE and return new EVENT_INVITEE_ID
 //
-//       (will need the eventInvitee's event_id and user id of
-//        the person who issued the invite)
+//       will need the eventInvitee's event_id (eventId) and user id
+//       of the person who issued the invite (inviteIssuerUserId)
+//
+//        will be called from eventInvitee route AND from events route
+//        (when adding an event, need to also add the organiser/logged-in-user as a invitee)
 // *****************************************************************
-// will be called from eventInvitee route AND from events route (when adding an event, need to also add the organiser/logged-in-user as a invitee)
 export async function postEventInvitee(newEventInvitee) {
-    // need eventId
-    // need inviteIssuerUserId
-
     debugOut(
         `/models/eventInvitees.js - postEventInvitee`,
         newEventInvitee,
@@ -118,7 +113,7 @@ export async function postEventInvitee(newEventInvitee) {
     );
 
     // TODO: test if it works if some of the incoming attributes are MISSING.
-    // event_invitee_id, event_invitee_rsvp_logged_date_time, and  event_invitee_create_date_time will auto-populate
+    // Note: event_invitee_id, event_invitee_rsvp_logged_date_time, and  event_invitee_create_date_time will auto-populate
     const sqlString = `INSERT INTO event_invitee
         (
             event_id,
@@ -156,6 +151,7 @@ export async function postEventInvitee(newEventInvitee) {
     );
 
     //TODO: maybe change what's returned. Only returning new event invitee id for now
+    //      we could return result, or could specifically just return the new event object (result.rows[0])
+    //      - BUT WOULD FIRST NEED TO MAP from TABLE_NAMES TO frontEndNames
     return newEventInviteeId;
-    //we could return result, or could specifically just return the new event object (result.rows[0]) - BUT WOULD FIRST NEED TO MAP from TABLE_NAMES TO frontEndNames
 }
