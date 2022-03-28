@@ -42,7 +42,6 @@ eventRoutes.get("/", async (req, res) => {
 eventRoutes.get(`/:id`, async (req, res) => {
     const eventId = req.params.id;
 
-    // ERROR CHECKING: check that the 'id' key value pair has been sent - otherwise return without attempting the search
     if (eventId === undefined || eventId === null) {
         res.status(400).json({
             success: false,
@@ -51,7 +50,6 @@ eventRoutes.get(`/:id`, async (req, res) => {
         });
         return;
     }
-    //  ERROR CHECKING: ensure a integer has been sent as event_id, otherwise return without attempting search
     if (isNotNumeric(eventId)) {
         res.status(400).json({
             success: false,
@@ -60,10 +58,8 @@ eventRoutes.get(`/:id`, async (req, res) => {
         });
         return;
     }
-    // it's now safe to go ahead and attempt to retrive the event object:
     const eventObject = await getEventById(eventId);
 
-    // ERROR CHECKING: check eventObject returned - NOW will either be undefined (if no event was retrieved) or will be a complete event object (NO ARRAY ANY MORE)
     if (eventObject === undefined) {
         res.status(404).json({
             success: false,
@@ -72,7 +68,6 @@ eventRoutes.get(`/:id`, async (req, res) => {
         });
         return;
     }
-    //OTHERWISE RETURN SUCCESS:
     res.json({
         success: true,
         message: `Retrieved event object with id of ${eventId}`,
@@ -87,7 +82,6 @@ eventRoutes.get(`/:id`, async (req, res) => {
 eventRoutes.get("/:id/comments", async (req, res) => {
     const eventId = req.params.id;
 
-    //ERROR CHECKING: check that the 'id' key value pair has been sent - otherwise return without attempting the search
     if (eventId === undefined || eventId === null) {
         res.status(400).json({
             success: false,
@@ -96,7 +90,6 @@ eventRoutes.get("/:id/comments", async (req, res) => {
         });
         return;
     }
-    // ERROR CHECKING:
     if (isNotNumeric(eventId)) {
         res.status(400).json({
             success: false,
@@ -106,10 +99,8 @@ eventRoutes.get("/:id/comments", async (req, res) => {
         return;
     }
 
-    // it's now safe to go ahead and attempt to retrive the comments array:
     const commentsArray = await getAllCommentsByEvent(eventId);
 
-    // RETURN SUCCESS:
     res.json({
         success: true,
         message: `Retrieved all comments, plus authors for event id ${eventId}`,
@@ -125,7 +116,6 @@ eventRoutes.get("/:id/comments", async (req, res) => {
 eventRoutes.get(`/:id/eventinvitees`, async (req, res) => {
     const eventId = req.params.id;
 
-    // ERROR CHECKING: check that the 'id' key value pair has been sent - otherwise return without attempting the search
     if (eventId === undefined || eventId === null) {
         res.status(400).json({
             success: false,
@@ -134,7 +124,7 @@ eventRoutes.get(`/:id/eventinvitees`, async (req, res) => {
         });
         return;
     }
-    //  ERROR CHECKING:
+
     if (isNotNumeric(eventId)) {
         res.status(400).json({
             success: false,
@@ -144,10 +134,8 @@ eventRoutes.get(`/:id/eventinvitees`, async (req, res) => {
         return;
     }
 
-    // it's now safe to go ahead and attempt to retrive the event invitees array:
     const eventInviteesArray = await getAllEventInviteesByEvent(eventId);
 
-    // RETURN SUCCESS:
     res.json({
         success: true,
         message: `Retrieved all event invitees for event ${eventId}`,
@@ -160,43 +148,42 @@ eventRoutes.get(`/:id/eventinvitees`, async (req, res) => {
 //                     and
 //        POST ORGANISER AS an EVENT_INVITEE
 // ************************************************
+// To insert a new event record, we must have an Organiser User ID, which must be an integer - organiserUserId is needed for inserting organiser-as-event invitee on create of new event
 eventRoutes.post("*", async function (req, res) {
-    // To insert a new event record, must have an Organiser User ID, which must be an integer - organiserUserId is needed for inserting organiser-as-event invitee on create of new event
     const organiserUserId = req.body.organiserUserId;
 
-    // ERROR CHECKING: Every newevent needs the App User ID of the organiser
     if (organiserUserId === undefined) {
         res.status(400).json({
             success: false,
-            message: `hexcode - id parameter (organiserUserId) not found`,
+            message: `hexcode - id parameter (organiserUserId) not found - Every new event needs the App User ID of the organiser`,
             payload: null,
         });
-        debugOut(
+        infoOut(
             `/routes/events.js - post`,
             `organiserUserId is undefined = |${organiserUserId}|`
         );
         return;
     }
 
-    // ERROR CHECKING: the organiser's app user id must be an integer (TODO: and must exsit in the database)
     if (isNotNumeric(organiserUserId)) {
         res.status(400).json({
             success: false,
-            message: `hexcode - organiser user id  must be integer`,
+            message: `hexcode - organiser's app user id  must be integer`,
             payload: null,
         });
-        debugOut(
+        infoOut(
             `/routes/events.js - post`,
             `organiserUserId is not numeric = |${organiserUserId}|`
         );
         return;
     }
-    //  ERROR CHECKING: must have an event title as well to insert. Rest of the event attributes are optional
+    //TODO: add in error-checking to ensure that the organiser's app user id  exists in the database)
+
     const eventTitle = req.body.eventTitle;
     if (eventTitle === undefined) {
         res.status(400).json({
             success: false,
-            message: `hexcode - new event title (eventTitle) not found`,
+            message: `hexcode - new event title (eventTitle) not found. Othe attributes are optional`,
             payload: null,
         });
 
@@ -207,19 +194,18 @@ eventRoutes.post("*", async function (req, res) {
         return;
     }
 
-    //OK to go ahead and insert a new event, just to the event table (none of the extra stuff) and reeive back the new event object, including new event id.
     const newEventId = await postEvent(req.body); //have updated postResults to contain newEventObject
 
     debugOut(`/routes/events.js - post`, `NEW EVENT ID is: ${newEventId}`);
 
     //here - i can use the new event_id (postResults.rows[0].event_id) OR JUST postResults, to then post related records (invitees, comments etc) to other tables.
     //DONE - add function call to post the organiser to the event_invitee table
-    // *****************************************************************
+    // =================================================================
     //       POST ONE EVENT_INVITEE and return new EVENT_INVITEE_ID
     //
     //       (will need the eventInvitee's event_id and user id of
     //        the person who issued the invite)
-    // *****************************************************************
+    // =================================================================
     let newEventInvitee = {};
     newEventInvitee.eventId = newEventId; //or, if i return whole object, postResults.rows[0].event_id;
     // on create event, we post the organiser as an invitee, setting themselves as the person who invited them.
