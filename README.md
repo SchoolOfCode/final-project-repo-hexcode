@@ -30,7 +30,7 @@ As well as the local dev environment, there is a staging and production environm
 
 The installation and configuration steps that were used to create this server are documented in the following markdown file:
 
-![README-installation-and-setup.md](./README-installation-and-setup.md)
+![server-installation-and-setup](./README-server-installation-and-setup.md)
 
 ---
 
@@ -45,7 +45,7 @@ We have created three different levels of data model to capture the intriciacies
 -   physical data model.
 -   TODO: include a png version of the three data models
 
-See ![design-data-model](./design-data-model.drawio) for the source drawio file containing the three data models.
+See ![design-data-model](./README-data-models-domain-logical-physical.drawio) for the source drawio file containing the three data models.
 
 #### Seed Data
 
@@ -53,7 +53,7 @@ For each of the tables created from the model, we have seeded them with data in 
 
 This data is detailed in the following markdown document:
 
-![readme-how-data-relates.md](./db/seeds/readme-how-data-relates.md)
+![how-seed-data-relates](./README-seed-data-setup.md)
 
 ---
 
