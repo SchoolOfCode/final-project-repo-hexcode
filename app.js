@@ -1,5 +1,5 @@
-//set up express, and the routes
-import express from "express";
+//set up express, and the routes - note: we are using The NodeJS ECMAScript module system instead o the NodeJS CommonJS module system (See pacakge.json)
+import express from "express"; //note: just convention that we call the imported function, express().  The default export is the createApplication function from the lib/express.js file
 import { debugOut, infoOut } from "./utils/logging.js";
 
 // Note: This article on cors was very useful. cors package is needed because front end and back end are hosted separately
@@ -18,7 +18,7 @@ import contactRoutes from "./routes/contacts.js";
 //END TODO:
 debugOut(`/app.js`, `script start.`);
 
-const app = express();
+const app = express(); //here we invoke the imported default express()function (createApplication) , and assign the return object to a new constant we've called app.
 
 // see above for cors explanation
 app.use(
@@ -47,8 +47,8 @@ app.use("/contacts", contactRoutes);
 
 // In conjunction with installing the express-promise-router package,  we are adding code to capture any errors that the package now handles, and return them nicely to the front end.
 app.use((err, req, res, next) => {
-    console.error(err?.stack ?? err);
-    //FYI - http status code 500 means some generic serverside error.
+    console.error(err?.stack ?? err); // if err.stack is null or undefined, evaluate to default, err instead. FYI ?? is nullish coalescing operator.
+    // FYI - http status code 500 means some generic serverside error.
     // FYI - this will also set res.ok to false.
     res.status(500).json({
         success: false,
@@ -57,6 +57,7 @@ app.use((err, req, res, next) => {
 });
 
 debugOut(`/app.js`, `script end.`);
+
 export default app;
 // FYI the database PORT is now covered in bin/www.js
-//FYI the routes are now in the ./routes folder
+// FYI the routes are now in the ./routes folder
